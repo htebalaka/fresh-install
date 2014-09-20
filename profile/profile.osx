@@ -1,0 +1,7 @@
+# show full path in terminal like unix, including a newline:
+# http://superuser.com/questions/239994/how-to-have-full-directory-path-always-shown-in-mac-terminal-like-linux-termina
+export PS1='\u@:\w$ '
+
+# the -G flag adds color on osx. this is os specific, on linux color is enabled by default, and -G removes some information when combined with -l
+alias ls='ls -AG'
+alias ll='ls -AhlFG'

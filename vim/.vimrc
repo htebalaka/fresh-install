@@ -15,8 +15,8 @@ Plugin 'klen/python-mode'
 "Plugin 'eagletmt/ghcmod-vim'             " requires the below
 "Plugin 'Shougo/vimproc'
 
-Plugin 'lukerandall/haskellmode-vim'
-Plugin 'eagletmt/neco-ghc'
+"Plugin 'lukerandall/haskellmode-vim'
+"Plugin 'eagletmt/neco-ghc'
 Plugin 'dag/vim2hs'
 Plugin 'scrooloose/syntastic'
 "Plugin 'vim-testobj-indent' -- needs git info
@@ -30,22 +30,6 @@ filetype plugin indent on
 " Quickly edit/reload the vimrc file
 "nmap <silent> <leader>ev :e $MYVIMRC<CR>
 "nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
-" remap jk to escape
-imap jk <Esc>
-" remap movement keys
-map i <Up>
-map j <Left>
-map k <Down>
-"remap window movement keys to match up with above
-map <C-j> <C-w>h
-map <C-k> <C-w>j
-map <C-l> <C-w>l
-map <C-i> <C-w>k
-" remap and `i` and `h` to compensate
-noremap h i
-noremap H I
-cmap w!! w !sudo tee % >/dev/null " allow w!! to sudo save
 
 
 "" CHANGE VIM BEHAVIOUR
@@ -83,7 +67,7 @@ filetype on
 filetype plugin on
 filetype indent on
 syntax on
-colorscheme mustang
+"colorscheme mustang
 
 " mostly from code.tutsplus.com/articles/top-10-pitfuls-when-switching-to-vim
 " blah blah   

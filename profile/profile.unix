@@ -1,0 +1,5 @@
+# the G flag adds color to the display, which is osx specific. on linux color
+# is displayed by default, and the G flag hides some information when using
+# long format
+alias ls='ls -A'
+alias ll='ls -AhlF'
