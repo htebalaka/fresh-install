@@ -41,7 +41,7 @@ executable-profiling: True
 -- constraint:
 -- preference:
 -- solver: choose
--- documentation: False
+documentation: True
 -- doc-index-file: $datadir/doc/index.html
 -- max-backjumps: 200
 -- reorder-goals: False
@@ -60,6 +60,8 @@ remote-build-reporting: anonymous
 -- jobs:
 -- username:
 -- password:
+
+-- require-sandbox: True
 
 install-dirs user
   -- prefix: /home/malcolm/.cabal

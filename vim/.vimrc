@@ -4,6 +4,7 @@
 "$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible
 filetype off
+let mapleader = ","
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'

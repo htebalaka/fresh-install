@@ -3,3 +3,7 @@
 # long format
 alias ls='ls -A'
 alias ll='ls -AhlF'
+
+# might be unix specific, these didn't give any output when i tested on osx
+alias mount='mount |column -t'
+alias jobs='jobs -l'
