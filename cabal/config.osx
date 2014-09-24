@@ -7,37 +7,21 @@
 -- Be careful with spaces and indentation because they are
 -- used to indicate layout for nested sections.
 
--- This configuration follows the layout of Haskell Platform on Mac OS X,
--- placing all installed package parts in the directories
---   /Library/Haskell for packages installed --global
---   ~/Library/Haskell for packages installed --user (the default)
 
--- === Built executables will be installed in:
---     ~/Library/Haskell/bin
---
--- You may wish to place this on your PATH by adding the following
--- line to your ~/.bash_profile:
---     export PATH="$HOME/Library/Haskell/bin:$PATH"
-
--- === When documentation is built, a master index to all documentation
--- will be placed in:
---     ~/Library/Haskell/doc/index.html
---
--- You may wish to bookmark that file
-
-
+-- require-sandbox: False
+-- ignore-sandbox: False
 remote-repo: hackage.haskell.org:http://hackage.haskell.org/packages/archive
-remote-repo-cache: /Users/malcolmgooding/Library/Haskell/repo-cache
+remote-repo-cache: /Users/malcolmgooding/.cabal/packages
 -- local-repo:
 -- logs-dir:
-world-file: /Users/malcolmgooding/Library/Haskell/logs/world
+world-file: /Users/malcolmgooding/.cabal/world
 -- verbose: 1
 -- compiler: ghc
 -- with-compiler:
 -- with-hc-pkg:
 -- scratchdir:
--- program-prefix:
--- program-suffix:
+-- program-prefix: 
+-- program-suffix: 
 -- library-vanilla: True
 library-profiling: True
 -- shared:
@@ -47,19 +31,22 @@ executable-profiling: True
 -- library-for-ghci: False
 -- split-objs: False
 -- executable-stripping: True
+-- library-stripping: True
 -- user-install: True
 -- package-db:
 -- flags:
 -- extra-include-dirs:
 -- extra-lib-dirs:
-extra-prog-path: /Users/malcolmgooding/Library/Haskell/bin
-tests: True
+extra-prog-path: /Users/malcolmgooding/.cabal/bin
+-- tests: False
 -- library-coverage: False
+-- exact-configuration: False
 -- benchmarks: False
 -- cabal-lib-version:
 -- constraint:
 -- preference:
 -- solver: choose
+-- allow-newer: False
 documentation: True
 -- doc-index-file: $datadir/doc/index.html
 -- max-backjumps: 2000
@@ -70,38 +57,54 @@ documentation: True
 -- avoid-reinstalls: False
 -- force-reinstalls: False
 -- upgrade-dependencies: False
-root-cmd: sudo
+-- root-cmd:
 -- symlink-bindir:
-build-summary: /Users/malcolmgooding/Library/Haskell/logs/build.log
+build-summary: /Users/malcolmgooding/.cabal/logs/build.log
 -- build-log:
 remote-build-reporting: anonymous
 -- one-shot: False
+-- run-tests:
 jobs: $ncpus
 -- username:
 -- password:
 
+haddock
+  -- keep-temp-files: False
+  -- hoogle: False
+  -- html: False
+  -- html-location:
+  -- executables: False
+  -- tests: False
+  -- benchmarks: False
+  -- all:
+  -- internal: False
+  -- css:
+  -- hyperlink-source: False
+  -- hscolour-css:
+  -- contents-location:
+
 install-dirs user
-  prefix: /Users/malcolmgooding/Library/Haskell
+  -- prefix: /Users/malcolmgooding/.cabal
   -- bindir: $prefix/bin
-  libdir: $prefix/$compiler-$arch/lib
-  libsubdir: $pkgid
+  -- libdir: $prefix/lib
+  -- libsubdir: $arch-$os-$compiler/$pkgid
   -- libexecdir: $prefix/libexec
   -- datadir: $prefix/share
-  datasubdir: $compiler-$arch/$pkgid
-  docdir: $prefix/$compiler-$arch/lib/$pkgid/doc
+  -- datasubdir: $arch-$os-$compiler/$pkgid
+  -- docdir: $datadir/doc/$arch-$os-$compiler/$pkgid
   -- htmldir: $docdir/html
   -- haddockdir: $htmldir
   -- sysconfdir: $prefix/etc
 
 install-dirs global
-  prefix: /Library/Haskell
+  -- prefix: /usr/local
   -- bindir: $prefix/bin
-  libdir: $prefix/$compiler-$arch/lib
-  libsubdir: $pkgid
+  -- libdir: $prefix/lib
+  -- libsubdir: $arch-$os-$compiler/$pkgid
   -- libexecdir: $prefix/libexec
   -- datadir: $prefix/share
-  datasubdir: $compiler-$arch/$pkgid
-  docdir: $prefix/$compiler-$arch/lib/$pkgid/doc
+  -- datasubdir: $arch-$os-$compiler/$pkgid
+  -- docdir: $datadir/doc/$arch-$os-$compiler/$pkgid
   -- htmldir: $docdir/html
   -- haddockdir: $htmldir
   -- sysconfdir: $prefix/etc
@@ -118,6 +121,8 @@ program-locations
   -- greencard-location:
   -- haddock-location:
   -- happy-location:
+  -- haskell-suite-location:
+  -- haskell-suite-pkg-location:
   -- hmake-location:
   -- hpc-location:
   -- hsc2hs-location:
@@ -129,7 +134,6 @@ program-locations
   -- lhc-pkg-location:
   -- nhc98-location:
   -- pkg-config-location:
-  -- ranlib-location:
   -- strip-location:
   -- tar-location:
   -- uhc-location:
@@ -146,6 +150,8 @@ program-default-options
   -- greencard-options:
   -- haddock-options:
   -- happy-options:
+  -- haskell-suite-options:
+  -- haskell-suite-pkg-options:
   -- hmake-options:
   -- hpc-options:
   -- hsc2hs-options:
@@ -157,8 +163,6 @@ program-default-options
   -- lhc-pkg-options:
   -- nhc98-options:
   -- pkg-config-options:
-  -- ranlib-options:
   -- strip-options:
   -- tar-options:
   -- uhc-options:
-

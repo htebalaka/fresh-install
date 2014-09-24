@@ -15,6 +15,7 @@ PROFILE="${FRESH_INSTALL}/profile"
 VIM="${FRESH_INSTALL}/vim"
 GHCI="${FRESH_INSTALL}/ghci"
 CABAL="${FRESH_INSTALL}/cabal"
+THEANO="${FRESH_INSTALL}/theano"
 
 # ensures the home profile imports $1
 function import {
@@ -26,7 +27,9 @@ function import {
 
 # ensures the home folder contains the contents of $1. does not create
 # the folder $1 itself; only copies its contents
-function sync_home { rsync -rv ${1}/ ${HOME}/ }
+function sync_home {
+   rsync -rv ${1}/ ${HOME}/ 
+}
 
 # this function ensures that changes in the ~/gits folders have been
 # reflected in the os, by copying files from ~/gits to their appropriate
@@ -41,7 +44,7 @@ function profile-refresh {
    # update vim, ghci, cabal
    sync_home $VIM
    sync_home $GHCI
-   sync_home $CABAL
+   rsync -rv ${CABAL}/config.$(if_osx "osx" "unix") ${HOME}/.cabal/config
    sync_home $THEANO
 }
 
