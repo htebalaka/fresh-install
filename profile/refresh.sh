@@ -16,6 +16,7 @@ VIM="${FRESH_INSTALL}/vim"
 GHCI="${FRESH_INSTALL}/ghci"
 CABAL="${FRESH_INSTALL}/cabal"
 THEANO="${FRESH_INSTALL}/theano"
+TASKWARRIOR="$FRESH_INSTALL/taskwarrior"
 
 # ensures the home profile imports $1
 function import {
@@ -46,6 +47,7 @@ function profile-refresh {
    sync_home $GHCI
    rsync -rv ${CABAL}/config.$(if_osx "osx" "unix") ${HOME}/.cabal/config
    sync_home $THEANO
+   rsync -rv ${TASKWARRIOR}/.taskrc ${HOME}/.taskrc
 }
 
 function nuke-all {

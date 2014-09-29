@@ -18,7 +18,7 @@ function cabal-nuke {
 # *-nukes, but because it's something i might need to use frequently i'm 
 # using the *-refresh name instead so that i don't frequently have to call
 function cabal-sandbox-refresh {
-   SOURCES=cabal sandbox list-sources | grep ^/
+   SOURCES=$(cabal sandbox list-sources | grep ^/)
    cabal sandbox delete
    cabal-sandbox-init $SOURCES
 }
