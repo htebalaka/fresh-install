@@ -41,12 +41,13 @@ function profile-refresh {
    import "${PROFILE}/profile.$(if_osx "osx" "unix")"
    import "${PROFILE}/refresh.sh"
    import "${PROFILE}/cabal.sh"
+   import "${PROFILE}/theano-env.sh"
 
    # update vim, ghci, cabal
    sync_home $VIM
    sync_home $GHCI
    rsync -rv ${CABAL}/config.$(if_osx "osx" "unix") ${HOME}/.cabal/config
-   sync_home $THEANO
+   rsync -rv ${THEANO}/.theanorc.$(if_osx "osx" "unix") ${HOME}/.theanorc
    rsync -rv ${TASKWARRIOR}/.taskrc ${HOME}/.taskrc
 }
 

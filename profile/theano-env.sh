@@ -7,17 +7,24 @@
 #
 
 # venv -u ~/theano-env # after a canopy update
+PYENV=~/theano-env
 
-function epd-nukeenv {
-   rm -rf ~/theano-env
-   epd-newenv ~/theano-env
+function py-nuke {
+   cd ~ && deactivate
+   rm -rf $(PYENV)
+   epd-newenv $(PYENV)
+}
+
+function py-activate {
+   cd $(PYENV)
+   source bin/activate
 }
 
 #https://support.enthought.com/entries/25928889-Issues-with-virtual-environments-venv-in-Canopy-1-2-and-1-3
 function epd-newenv {
    source ~/Library/Enthought/Canopy_64bit/User/bin/activate
    canopy_cli venv $1
-   enpkg --prefix $1 enstaller
+   enpkg --prefix $1 enstaller # this triggers a warning about argparse
    epd-installdeps $1
 }
 
@@ -26,6 +33,8 @@ function epd-installdeps {
    cd $1
    source bin/activate
    enpkg --userpass
+   enpkg --update-all # this triggers a prompt to update enpkg, and will ask you to redo the last command after it is updated. dunno how to explicitly update enpkg
+   enpkg mkl
    enpkg ipython readline #readline adds color/tab completion to ipython
    enpkg numpy scipy sympy nose pydot
    epd-installml $1
