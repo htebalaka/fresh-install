@@ -7,10 +7,9 @@
 #
 
 # venv -u ~/theano-env # after a canopy update
-set -e
 PYENV="${HOME}/theano-env"
 
-function py-nuke {
+function canopy-setup {
    cd ~ && deactivate
    rm -rf ${PYENV}
    epd-newenv ${PYENV}
