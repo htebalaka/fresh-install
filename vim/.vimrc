@@ -26,7 +26,8 @@ Plugin 'scrooloose/syntastic'
 call vundle#end()
 filetype plugin indent on
 
-
+set cindent
+autocmd FileType python setlocal foldmethod=indent smartindent shiftwidth=4 ts=4 et cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 " Quickly edit/reload the vimrc file
 "nmap <silent> <leader>ev :e $MYVIMRC<CR>
