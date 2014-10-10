@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# activate one of the listed sandboxes
+function hs-activate {
+   sandbox="cabal.sandbox.config"
+   case $1 in
+      "base" )
+         export CABAL_SANDBOX_CONFIG="${HOME}/base/${sandbox}"
+         export sandbox_name="(cabal-sandbox: base)"
+         ;;
+      "microbreak" )
+         export CABAL_SANDBOX_CONFIG="${HOME}/gits/microbreak/${sandbox}"
+         export sandbox_name="(cabal-sandbox: microbreak)"
+         ;;
+      *)
+         echo "The current valid sandboxes are: microbreak, base"
+   esac
+}
+# export PS1="\${sandbox_name}${PS1}"
+
 # creates a new cabal sandbox
 function cabal-sandbox-init {
    cabal sandbox init

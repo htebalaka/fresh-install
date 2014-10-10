@@ -32,6 +32,22 @@ function sync_home {
    rsync -rv ${1}/ ${HOME}/ 
 }
 
+function git-ps1 {
+   export GIT_PS1_SHOWDIRTYSTATE=1
+   export GIT_PS1_SHOWSTASHSTATE=1
+   export GIT_PS1_SHOWUNTRACKEDFILES=1
+   # Explicitly unset color (default anyhow). Use 1 to set it.
+   export GIT_PS1_SHOWCOLORHINTS=1
+   export GIT_PS1_DESCRIBE_STYLE="branch"
+   export GIT_PS1_SHOWUPSTREAM="auto git"
+   export PS1="${lightblue}\${sandbox_name} \$(__git_ps1 '%s')${color_off} \
+\$(success) \$(eggtimer-gettime) \
+${lightgreen}\u${color_off}:${lightred}\w${color_off}$ "
+}
+
+# should add taskwarrior, jobs, working color, time
+git-ps1
+
 # this function ensures that changes in the ~/gits folders have been
 # reflected in the os, by copying files from ~/gits to their appropriate
 # location, and having the profile source the relevent files
@@ -42,6 +58,9 @@ function profile-refresh {
    import "${PROFILE}/refresh.sh"
    import "${PROFILE}/cabal.sh"
    import "${PROFILE}/theano-env.sh"
+   import "${PROFILE}/git-prompt.sh"
+   import "${PROFILE}/color.sh"
+   import "${PROFILE}/../ps1/eggtimer.sh"
 
    # update vim, ghci, cabal
    sync_home $VIM
