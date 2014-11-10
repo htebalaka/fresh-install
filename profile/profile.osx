@@ -9,3 +9,4 @@ alias ll='ls -AhlFG'
 # adds cabal binaries to path
 export PATH="$HOME/Library/Haskell/bin:$PATH"
 export PATH="$PATH:$HOME/gits/microbreak/.cabal-sandbox/bin"
+export PATH="$PATH:$HOME/gits/haskell-sandbox/.cabal-sandbox/bin"

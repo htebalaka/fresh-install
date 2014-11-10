@@ -4,6 +4,10 @@
 function hs-activate {
    sandbox="cabal.sandbox.config"
    case $1 in
+      "hsrc" )
+         export CABAL_SANDBOX_CONFIG="${HOME}/base/${sandbox}"
+         export sandbox_name="hsrc"
+         ;;
       "base" )
          export CABAL_SANDBOX_CONFIG="${HOME}/base/${sandbox}"
          export sandbox_name="(cabal-sandbox: base)"
@@ -12,8 +16,20 @@ function hs-activate {
          export CABAL_SANDBOX_CONFIG="${HOME}/gits/microbreak/${sandbox}"
          export sandbox_name="(cabal-sandbox: microbreak)"
          ;;
+      "machinelearning" )
+         export CABAL_SANDBOX_CONFIG="${HOME}/gits/machinelearning/${sandbox}"
+         export sandbox_name="machinelearning"
+         ;;
+      "hashlab" )
+         export CABAL_SANDBOX_CONFIG="${HOME}/gits/hashlab/${sandbox}"
+         export sandbox_name="hashlab"
+         ;;
+      "here" )
+         export CABAL_SANDBOX_CONFIG="$(pwd)/${sandbox}"
+         export sandbox_name="${PWD##*/}"
+         ;;
       *)
-         echo "The current valid sandboxes are: microbreak, base"
+         echo "The current valid sandboxes are: microbreak, base, machinelearning"
    esac
 }
 # export PS1="\${sandbox_name}${PS1}"

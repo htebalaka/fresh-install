@@ -1,6 +1,12 @@
-:set prompt "\ESC[1;34m%s\n\ESC[0;34m\ESC[mλ> "
+-- :set prompt "\ESC[1;34m%s\n\ESC[0;34m\ESC[mλ> "
+-- :set prompt "%s\nλ> "
+:set prompt "\ESC[34m%s\ESC[0m\nλ> "
 :set -XNoImplicitPrelude
 :set -XLambdaCase
 :set -XNoMonomorphismRestriction
+:set -XOverloadedStrings
+:set -XGADTs
+:set -XTypeFamilies
 
 import NewPrelude
+-- import BasicPrelude

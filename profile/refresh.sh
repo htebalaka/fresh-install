@@ -18,12 +18,21 @@ CABAL="${FRESH_INSTALL}/cabal"
 THEANO="${FRESH_INSTALL}/theano"
 TASKWARRIOR="$FRESH_INSTALL/taskwarrior"
 
-# ensures the home profile imports $1
-function import {
+function permanently {
    if ! grep -Fq "$1" $HOME_PROFILE; then
-      echo "source $1" >> $HOME_PROFILE
+      echo "$1" >> $HOME_PROFILE
    fi
    . $HOME_PROFILE
+}
+
+function import {
+   permanently "source $1"
+}
+function prepend-path {
+   permanently "export PATH=$1:\$PATH"
+}
+function append-path {
+   permanently "export PATH=\$PATH:$1"
 }
 
 # ensures the home folder contains the contents of $1. does not create
@@ -40,10 +49,14 @@ function git-ps1 {
    export GIT_PS1_SHOWCOLORHINTS=1
    export GIT_PS1_DESCRIBE_STYLE="branch"
    export GIT_PS1_SHOWUPSTREAM="auto git"
-   export PS1="${lightblue}\${sandbox_name} \$(__git_ps1 '%s')${color_off} \
-\$(success) \$(eggtimer-gettime) \
-${lightgreen}\u${color_off}:${lightred}\w${color_off}$ "
+   export CABAL_SANDBOX_CONFIG=$(haskell-sandbox path)
+   export PS1="\[$cyan\]\$(haskell-sandbox name)\[$color_off\]\
+\[$yellow\] \$(__git_ps1 '%s ')\[$color_off\]\
+\[$green\]\u\[$color_off\]:\[$red\]\w\[$color_off\]$ "
+   # need stuff for jobs, cmd #
 }
+
+export PROMPT_COMMAND=git-ps1
 
 # should add taskwarrior, jobs, working color, time
 git-ps1
