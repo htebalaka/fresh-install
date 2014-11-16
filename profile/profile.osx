@@ -10,3 +10,14 @@ alias ll='ls -AhlFG'
 export PATH="$HOME/Library/Haskell/bin:$PATH"
 export PATH="$PATH:$HOME/gits/microbreak/.cabal-sandbox/bin"
 export PATH="$PATH:$HOME/gits/haskell-sandbox/.cabal-sandbox/bin"
+export PATH="$PATH:$HOME/gits/new-prelude/.cabal-sandbox/bin"
+export PATH="$PATH:$HOME/gits/haskell-base/.cabal-sandbox/bin"
+
+function vim {
+   /usr/local/Cellar/vim/7.4.430_1/bin/vim "$@"
+}
+function ctags {
+   /usr/local/Cellar/ctags/5.8/bin/ctags "$@"
+}
+export -f vim
+export -f ctags

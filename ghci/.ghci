@@ -1,10 +1,10 @@
 :set prompt "\ESC[34m%s\ESC[0m\nλ> "
 :set -XNoImplicitPrelude
-:set -XLambdaCase
-:set -XNoMonomorphismRestriction
+:seti -XLambdaCase
+:seti -XNoMonomorphismRestriction
 -- :set -XOverloadedStrings
-:set -XGADTs
-:set -XTypeFamilies
+:seti -XGADTs
+:seti -XTypeFamilies
 
 :def _load const(System.Environment.getEnvironment>>=maybe(return"")readFile.lookup"GHCIRC")
 :_load

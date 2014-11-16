@@ -86,7 +86,7 @@ function profile-refresh {
    import "${PROFILE}/../ps1/eggtimer.sh"
 
    # update vim, ghci, cabal
-   sync_home $VIM
+   rsync -rv ${VIM}/.vimrc.local ${HOME}/.vimrc.local
    sync_home $GHCI
    rsync -rv ${CABAL}/config.$(if_osx "osx" "unix") ${HOME}/.cabal/config
    rsync -rv ${THEANO}/.theanorc.$(if_osx "osx" "unix") ${HOME}/.theanorc
@@ -96,7 +96,7 @@ function profile-refresh {
 function nuke-all {
    # nuke vim
    rm -rf ~/.vim
-	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
    rsync -rv ${VIM}/ ${HOME}/
    vim +PluginInstall +qall
 
