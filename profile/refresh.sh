@@ -49,9 +49,19 @@ function git-ps1 {
    export GIT_PS1_SHOWCOLORHINTS=1
    export GIT_PS1_DESCRIBE_STYLE="branch"
    export GIT_PS1_SHOWUPSTREAM="auto git"
-   export CABAL_SANDBOX_CONFIG=$(haskell-sandbox path)
-   export PS1="\[$cyan\]\$(haskell-sandbox name)\[$color_off\]\
-\[$yellow\] \$(__git_ps1 '%s ')\[$color_off\]\
+
+   # we have to be careful to unset the CABAL_SANDBOX_CONFIG variable
+   # when it is empty, or cabal becomes screwy
+   local sandbox=$(haskell-sandbox '%s')
+   if [ -z ${sandbox} ]
+   then
+      unset CABAL_SANDBOX_CONFIG
+   else
+      export CABAL_SANDBOX_CONFIG=${sandbox}
+   fi
+
+   export PS1="\[$cyan\]\$(haskell-sandbox '%n ')\[$color_off\]\
+\[$yellow\]\$(__git_ps1 '%s ')\[$color_off\]\
 \[$green\]\u\[$color_off\]:\[$red\]\w\[$color_off\]$ "
    # need stuff for jobs, cmd #
 }

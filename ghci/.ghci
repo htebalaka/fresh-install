@@ -1,12 +1,55 @@
--- :set prompt "\ESC[1;34m%s\n\ESC[0;34m\ESC[mλ> "
--- :set prompt "%s\nλ> "
 :set prompt "\ESC[34m%s\ESC[0m\nλ> "
 :set -XNoImplicitPrelude
 :set -XLambdaCase
 :set -XNoMonomorphismRestriction
-:set -XOverloadedStrings
+-- :set -XOverloadedStrings
 :set -XGADTs
 :set -XTypeFamilies
 
+:def _load const(System.Environment.getEnvironment>>=maybe(return"")readFile.lookup"GHCIRC")
+:_load
+:undef _load
+
+:{
+:def bind \varcmd -> case break Data.Char.isSpace varcmd of
+          (var,_:cmd) -> return $ unlines                
+             [":set -fno-print-bind-result" 
+             ,"tmp <- System.Directory.getTemporaryDirectory"
+             ,"(f,h) <- System.IO.openTempFile tmp \"ghci\""
+             ,"sto <- GHC.IO.Handle.hDuplicate System.IO.stdout"
+             ,"GHC.IO.Handle.hDuplicateTo h System.IO.stdout"
+             ,"System.IO.hClose h"
+             ,cmd
+             ,"GHC.IO.Handle.hDuplicateTo sto System.IO.stdout"
+             ,"let readFileNow f = readFile f >>= \\t->length t `seq` return t"
+             ,var++" <- fmap (reverse . drop 1 . reverse) (readFileNow f)"
+             ,"System.Directory.removeFile f"]
+          _ -> return "putStrLn \"usage: :bind <var> <cmd>\""
+:}
+
 import NewPrelude
--- import BasicPrelude
+
+:{
+let escape :: String -> String -> (String, String)
+    escape hd ('\\':'|':tl) = escape ('|':hd) tl
+    escape hd ('|':tl) = (Data.List.intercalate "\\\\n" . lines . reverse . drop 1 $ hd, dropWhile Data.Char.isSpace . drop 1 $ tl)
+    escape hd (t:tl) = escape (t:hd) tl
+:}
+:{
+:def sh \varcmd -> let (ghci, bash) = escape "" varcmd
+                   in return $ unlines
+                     [":bind ghci "++ghci
+                     ,":cmd return $ \":!echo \"++show ghci++\" | "++bash++"\""]
+:}
+
+:{
+:def grep \cmd -> case break Data.Char.isSpace cmd of
+          (glob,_:cmd) -> return $ ":sh "++cmd++" | grep "++glob
+:}
+
+:{
+:def grub \cmd -> if Data.Char.isUpper . head $ cmd
+                  then case break Data.Char.isSpace cmd of
+                      (mod, _:glob) -> return $ ":sh :browse "++mod++" | grep "++glob
+                  else return $ ":sh :browse | grep "++cmd
+:}
