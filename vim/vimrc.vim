@@ -1,5 +1,7 @@
+
+" source custom files
+source ~/gits/fresh-install/vim/unmappings.vim
 source ~/gits/fresh-install/vim/keymap.vim
-source ~/gits/fresh-install/vim/layout.vim
 source ~/gits/fresh-install/vim/nerdtree.vim
 
 autocmd FileType haskell source ~/gits/fresh-install/vim/haskell.vim
@@ -12,6 +14,12 @@ map <Leader>e :Errors<CR>
 map <Leader>s :SyntasticToggleMode<CR>
 
 " tagbar
-nnoremap <silent> <F9> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
+" highlights the current line
+set cursorline
+" show matching parens
+set showmatch
+
+
+" nnoremap <Leader>z :HoogleClose<CR>:NERDTreeClose<CR>:TagbarClose<CR>
