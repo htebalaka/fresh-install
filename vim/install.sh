@@ -1,5 +1,20 @@
 #!/bin/sh
 
-curl -o - https://raw.githubusercontent.com/begriffs/haskell-vim-now/master/install.sh | bash
-cp ~/gits/fresh-install/vim/.vimrc.local ~/.vimrc.local
-sed -i.bak -e "/Bundle 'enomsg\/vim-haskellConcealPlus'/d" ~/.vimrc
+function installplugin {
+    gsed -i -e "/Bundle 'gmarik\/vundle'/a Bundle '$1'" ~/.vimrc
+    vim +BundleInstall +qall
+}
+
+function uninstallplugin {
+    sed -i "/Bundle '$1'/d" ~/.vimrc
+}
+
+function install {
+    brew install gnu-sed
+
+    curl -o - https://raw.githubusercontent.com/begriffs/haskell-vim-now/master/install.sh | bash
+    gsed -i -e "/Bundle 'gmarik\/vundle'/a source ~/gits/fresh-install/vim/plugins.vim" ~/.vimrc
+    cp ~/gits/fresh-install/vim/.vimrc.local ~/.vimrc.local
+
+    uninstallplugin enomsg/vim-HaskellConcealPlus
+  }
