@@ -12,16 +12,18 @@ nnoremap :d<CR> :Bd<CR>
 nnoremap :wd<CR> :w<CR>:Bd<CR>
 nnoremap :d!<CR> :Bd!<CR>
 
-" lists all open buffers, and prompts for which buffer to switch to
-noremap <Leader>b :buffers<CR>:buffer<Space>
+" prompts for a buffer name. {b}ackwards is remapped to W to be more consistent
+" with other operators
+nnoremap b :buffer<space>
 
-" switches to the previous buffer
+" switches to the previous buffer. {B}ackwards is remapped to gW, using g more
+" consistently tindicate WORD
 nnoremap <Leader>B :b#<CR>
 
 " toggle tagbar browser, mnemonic is 'object browser'
 nnoremap <Leader>o :TagbarToggle<CR>
 
-nnoremap <leader>z :nohlsearch<CR>
+nnoremap <leader><space> :nohlsearch<CR>
 
 " makes Y behave more like C/D and not like yy
 nnoremap Y y$

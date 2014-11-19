@@ -16,4 +16,4 @@ nnoremap <Leader>H :Hoogle<Space>
 " windows is kind of inconvenient
 nnoremap <Leader>i :HoogleInfo<CR>
 nnoremap <Leader>I :HoogleInfo<Space>
-nnoremap <leader>z :HoogleClose<CR>:nohlsearch<CR>
+nnoremap <leader><space> :HoogleClose<CR>:nohlsearch<CR>

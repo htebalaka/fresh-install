@@ -47,7 +47,17 @@ noremap gE ge
 
 " the default behaviour of s can be accomplished with cl, likewise S and cc
 map s <Plug>(easymotion-s2)
-
+map S <Plug>(easymotion-lineanywhere)
+" use the default line_anywhere, except also match the first and last character
+" of words consisting of only non-alphanumeric characters surrounded by whitespace
+let g:EasyMotion_re_line_anywhere = '\v' .
+        \       '(<.|^$)' . '|' .
+        \       '(.>|^$)' . '|' .
+        \       '(_\zs.)' . '|' .
+        \       '(#\zs.)' . '|' .
+        \       '(^\zs.)' . '|' . '(.\ze$)' . '|' .
+        \       '(\s*|^)\zs\W+\ze(\s*|$)'
+"test <$> helloMyName **
 " these are similar to the default mappings, but provide different highlight
 " methods and some other functionality
 "map n <Plug>(easymotion-next)
