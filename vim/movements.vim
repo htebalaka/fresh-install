@@ -47,19 +47,18 @@ noremap gE ge
 
 " the default behaviour of s can be accomplished with cl, likewise S and cc
 map s <Plug>(easymotion-s2)
+" another option for this is (easymotion-bd-wl) or (eaysmotion-bd-Wl). i'd like  -#@!
+" something between /word/ and /WORD/, that works for both /e/ and /w/. the regex can
+" be customized with /let g:EasyMotion_re_line_anywhere/.
 map S <Plug>(easymotion-lineanywhere)
-" use the default line_anywhere, except also match the first and last character
-" of words consisting of only non-alphanumeric characters surrounded by whitespace
 let g:EasyMotion_re_line_anywhere = '\v' .
-        \       '(<.|^$)' . '|' .
-        \       '(.>|^$)' . '|' .
-        \       '(_\zs.)' . '|' .
-        \       '(#\zs.)' . '|' .
-        \       '(^\zs.)' . '|' . '(.\ze$)' . '|' .
-        \       '(\s*|^)\zs\W+\ze(\s*|$)'
-"test <$> helloMyName **
-" these are similar to the default mappings, but provide different highlight
-" methods and some other functionality
+    \       '(<.|^$)' . '|' .
+    \       '(.>|^$)' . '|' .
+    \       '(\l)\zs(\u)' . '|' .
+    \       '(_\zs.)' . '|' .
+    \       '(#\zs.)' . '|' .
+    \       '(^\s*\zs\S)' . '|' . '(\S\ze\s*$)' . '|' . '(.\ze)$' " handles last non-ws, first non-ws, and eol
+
 "map n <Plug>(easymotion-next)
 "map N <Plug>(easymotion-prev)
 
