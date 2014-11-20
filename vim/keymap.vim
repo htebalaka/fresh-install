@@ -23,7 +23,8 @@ nnoremap <Leader>B :b#<CR>
 " toggle tagbar browser, mnemonic is 'object browser'
 nnoremap <Leader>o :TagbarToggle<CR>
 
-nnoremap <leader><space> :nohlsearch<CR>
+"nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <C-p> :CtrlP<cr>
 
 " makes Y behave more like C/D and not like yy
 nnoremap Y y$

@@ -12,5 +12,11 @@ Bundle 'dahu/vim-fanfingtastic'
 " dependency of some other plugins i'm using (i think just easymotion)
 Bundle 'tpope/vim-repeat'
 
-" vim-hardtime disables consecutive hjlk
-Bundle 'takac/vim-hardtime'
+" improves the syntax-based folding in Haskell files
+Bundle 'Twinside/vim-haskellFold'
+
+" displays marks visually in buffers
+Bundle 'kshenoy/vim-signature'
+
+" intelligently switch between relative and absolute line numbers
+Bundle 'jeffkreeftmeijer/vim-numbertoggle'

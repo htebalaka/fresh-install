@@ -1,15 +1,3 @@
-" use tab for searching instead of n
-noremap <Tab> n
-noremap <S-Tab> N
-
-" these make n/N work for paging through f/t motions instead of the search motions
-nmap n <Plug>fanfingtastic_;
-xmap n <Plug>fanfingtastic_;
-omap n <Plug>fanfingtastic_;
-nmap N <Plug>fanfingtastic_,
-xmap N <Plug>fanfingtastic_,
-omap N <Plug>fanfingtastic_,
-
 " remap the capital movement keys to indicate first non-whitespace character
 " in line, last character in line, top of file, and bottom file
 noremap H ^

@@ -16,3 +16,5 @@ autocmd FileType haskell source ~/gits/fresh-install/vim/haskell.vim
 autocmd FileType python source ~/gits/fresh-install/vim/python.vim
 autocmd FileType cpp source ~/gits/fresh-install/vim/cpp.vim
 
+set expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
