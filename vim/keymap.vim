@@ -24,7 +24,7 @@ nnoremap <Leader>B :b#<CR>
 nnoremap <Leader>o :TagbarToggle<CR>
 
 "nnoremap <leader><space> :nohlsearch<CR>
-nnoremap <C-p> :CtrlP<cr>
+let g:ctrlp_map = '<C-p>'
 
 " makes Y behave more like C/D and not like yy
 nnoremap Y y$

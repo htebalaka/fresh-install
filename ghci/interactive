@@ -7,4 +7,4 @@
 -- these two don't work well with :seti
 :set prompt "\ESC[34m%s\ESC[0m\nλ> "
 :set -XNoImplicitPrelude
-import NewPrelude
+import BasePrelude
