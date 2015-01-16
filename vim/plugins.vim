@@ -18,5 +18,8 @@ Bundle 'Twinside/vim-haskellFold'
 " displays marks visually in buffers
 Bundle 'kshenoy/vim-signature'
 
+" man page viewer
+Bundle 'Z1MM32M4N/vim-superman'
+
 " intelligently switch between relative and absolute line numbers
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'

@@ -7,6 +7,14 @@ function if_osx {
   fi
 }
 
+function man {
+    vim -c "SuperMan $*"
+
+    if [ "$?" != "0" ]; then
+        echo "No manual entry for $*"
+    fi
+}
+
 # add bash functions
 #source "${HOME}/gits/fresh-install/profile/profile.all"
 #source "${HOME}/gits/fresh-install/profile/profile.$(if_osx "osx" "unix")"
