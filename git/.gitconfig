@@ -1,5 +1,2 @@
-[user]
-	email = goodingm@gmail.com
-	name = Malcolm Gooding
-[core]
-	editor = vim
+[include]
+    path = ~/gits/fresh-install/git/config.git
