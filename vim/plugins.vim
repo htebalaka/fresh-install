@@ -21,5 +21,13 @@ Bundle 'kshenoy/vim-signature'
 " man page viewer
 Bundle 'Z1MM32M4N/vim-superman'
 
-" intelligently switch between relative and absolute line numbers
+" intelligently switch between relative and absolute line numbers when in
+" insert mode or other modes
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+
+" highlight based on variable names rather than variable type
+" Bundle 'jaxbot/semantic-highlight.vim'
+
+" fish syntax
+Bundle 'dag/vim-fish'
+

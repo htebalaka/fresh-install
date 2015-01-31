@@ -14,3 +14,6 @@ set incsearch
 
 " increase width so that left window has >80 chars width
 set winwidth=85
+
+" fold based on {{{ }}} markers
+set foldmethod=marker

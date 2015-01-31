@@ -2,8 +2,8 @@
 " source custom files
 source ~/gits/fresh-install/vim/unmappings.vim
 source ~/gits/fresh-install/vim/keymap.vim
-source ~/gits/fresh-install/vim/settings.vim
 source ~/gits/fresh-install/vim/movements.vim
+source ~/gits/fresh-install/vim/settings.vim
 
 " source plugin specific settings
 source ~/gits/fresh-install/vim/syntastic.vim
