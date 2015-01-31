@@ -32,6 +32,12 @@ function fish_prompt
         error load $load1m
     end
 
+    # Show number of jobs
+    set -l jobs (jobs | wc -l | tr -d ' ')
+    if test $jobs -ge "1"
+        error jobs $jobs
+    end
+
     # Show disk usage when low
     set -l du (df / | tail -n1 | sed "s/  */ /g" | cut -d' ' -f 5 | cut -d'%' -f1)
     if test $du -gt 80

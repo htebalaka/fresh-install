@@ -6,6 +6,7 @@ source ~/gits/fresh-install/vim/movements.vim
 source ~/gits/fresh-install/vim/settings.vim
 
 " source plugin specific settings
+source ~/gits/fresh-install/vim/conque.vim
 source ~/gits/fresh-install/vim/syntastic.vim
 source ~/gits/fresh-install/vim/tagbar.vim
 source ~/gits/fresh-install/vim/airline.vim

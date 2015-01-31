@@ -31,3 +31,6 @@ Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 " fish syntax
 Bundle 'dag/vim-fish'
 
+" conque-term
+Bundle 'rosnefeld/conque-term'
+
