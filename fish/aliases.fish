@@ -22,6 +22,24 @@ set -gx PATH /usr/local/Cellar/vim/7.4.430_1/bin $PATH
 set -gx PATH $PATH $HOME/gits/haskell-sandbox/.cabal-sandbox/bin/
 set -gx PATH $PATH $HOME/gits/microbreak/.cabal-sandbox/bin/
 
+# osx specific
 alias ls='ls -AG'
+
+# this function conditionally turns off the current sandbox when creating a
+# new sandbox, so that you can create a sandbox without accidentally nuking
+# an existing one. i might prefer to have this simply raise an error when an
+# existing sandbox is found
+function cabal
+    if [ (count $argv) = 2 ]
+        if [ $argv[1] = "sandbox" -a $argv[2] = "init" ]
+            #if set -q CABAL_SANDBOX_CONFIG
+            #    echo "A sandbox is already active"
+            #    return
+
+            set -q CABAL_SANDBOX_CONFIG; and echo "A sandbox is already active."; and return
+        end
+    end
+    command cabal $argv
+end
 
 

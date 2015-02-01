@@ -10,7 +10,6 @@
 -- Cabal library version: 1.22.0.0
 -- cabal-install version: 1.22.0.0
 
-
 require-sandbox: True
 -- ignore-sandbox: False
 remote-repo: hackage.haskell.org:http://hackage.haskell.org/packages/archive
@@ -54,7 +53,7 @@ tests: True
 -- preference:
 -- solver: choose
 -- allow-newer: False
--- documentation: False
+documentation: True
 -- doc-index-file: $datadir/doc/$arch-$os-$compiler/index.html
 -- max-backjumps: 2000
 -- reorder-goals: False

@@ -5,7 +5,7 @@ function fish_prompt
     set -l last_status $status
 
     if [ (whoami) = "root" ]
-        printf $ce
+        printf (set_color red)
         printf "root"
         printf $c0
         printf ", "
@@ -54,8 +54,12 @@ function fish_prompt
     set -l sandbox (haskell-sandbox '%s')
     if [ "." != $sandbox ]
         set -gx CABAL_SANDBOX_CONFIG $sandbox
-        section box (haskell-sandbox '%n')
+        set -l sandboxName (haskell-sandbox '%n')
+        if [ "malcolmgooding" != $sandboxName ]
+            section "box" $sandboxName
+        end
     else
+        error box "n/a"
         set -ex CABAL_SANDBOX_CONFIG
     end
 
@@ -69,10 +73,10 @@ function fish_prompt
             set git_branch "$ce$git_branch~$git_dirty"
         end
         if test $git_commits_ahead -ne "0"
-            set git_branch "$git_branch$c3↑$git_commits_ahead"
+            set git_branch "$git_branch$ce↑$git_commits_ahead"
         end
         if test $git_commits_behind -ne "0"
-            set git_branch "$git_branch$ce↓$git_commits_behind"
+            set git_branch "$git_branch(set_color red)↓$git_commits_behind"
         end
 
         section git $git_branch
