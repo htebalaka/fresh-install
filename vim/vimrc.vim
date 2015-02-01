@@ -20,22 +20,22 @@ filetype plugin indent on
 NeoBundleCheck
 
 " source custom files
-source ~/gits/fresh-install/vim/themes.vim
 source ~/gits/fresh-install/vim/keymap.vim
 source ~/gits/fresh-install/vim/movements.vim
 source ~/gits/fresh-install/vim/settings.vim
 
 " source plugin specific settings
-source ~/gits/fresh-install/vim/conque.vim
-source ~/gits/fresh-install/vim/syntastic.vim
-source ~/gits/fresh-install/vim/tagbar.vim
-source ~/gits/fresh-install/vim/airline.vim
-source ~/gits/fresh-install/vim/hardtime.vim
+source ~/gits/fresh-install/vim/plugins/themes.vim
+source ~/gits/fresh-install/vim/plugins/conque.vim
+source ~/gits/fresh-install/vim/plugins/syntastic.vim
+source ~/gits/fresh-install/vim/plugins/tagbar.vim
+source ~/gits/fresh-install/vim/plugins/airline.vim
+source ~/gits/fresh-install/vim/plugins/hardtime.vim
 
 " source language specific settings
-autocmd FileType haskell source ~/gits/fresh-install/vim/haskell.vim
-autocmd FileType python source ~/gits/fresh-install/vim/python.vim
-autocmd FileType cpp source ~/gits/fresh-install/vim/cpp.vim
+autocmd FileType haskell source ~/gits/fresh-install/vim/lang/haskell.vim
+autocmd FileType python source ~/gits/fresh-install/vim/lang/python.vim
+autocmd FileType cpp source ~/gits/fresh-install/vim/lang/cpp.vim
 
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 

@@ -1,10 +1,3 @@
-" remap the capital movement keys to indicate first non-whitespace character
-" in line, last character in line, top of file, and bottom file
-noremap H ^
-noremap J G
-noremap K gg
-noremap L $
-
 "remap jk/kj to escape
 inoremap jk <Esc>
 inoremap kj <Esc>
