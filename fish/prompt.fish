@@ -4,10 +4,12 @@ function fish_prompt
 
     set -l last_status $status
 
-    printf $c1
-    printf (whoami)
-    printf $c0
-    printf ", "
+    if [ (whoami) = "root" ]
+        printf $ce
+        printf "root"
+        printf $c0
+        printf ", "
+    end
 
     # Current time
     printf (date "+$c2%H$c0:$c2%M$c0:$c2%S")
