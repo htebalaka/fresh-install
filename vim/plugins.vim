@@ -34,3 +34,4 @@ Bundle 'dag/vim-fish'
 " conque-term
 Bundle 'rosnefeld/conque-term'
 
+"Bundle 'benmills/vimux'

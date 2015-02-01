@@ -51,10 +51,10 @@ function fish_prompt
     # set the cabal sandbox for use by cabal, and show it in the prompt
     set -l sandbox (haskell-sandbox '%s')
     if [ "." != $sandbox ]
-        set -g CABAL_SANDBOX_CONFIG $sandbox
+        set -gx CABAL_SANDBOX_CONFIG $sandbox
         section box (haskell-sandbox '%n')
     else
-        set -e CABAL_SANDBOX_CONFIG
+        set -ex CABAL_SANDBOX_CONFIG
     end
 
     set -l git_branch (git rev-parse --abbrev-ref HEAD ^ /dev/null)
