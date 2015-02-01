@@ -1,6 +1,11 @@
 
 " highlights the current line
 set cursorline
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END
 
 " show line numbers
 set nu

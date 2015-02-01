@@ -41,12 +41,11 @@ NeoBundle 'Z1MM32M4N/vim-superman'
 " insert mode or other modes
 NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'
 
-" highlight based on variable names rather than variable type
-" NeoBundle 'jaxbot/semantic-highlight.vim'
-
 " fish syntax
 NeoBundle 'dag/vim-fish'
 
 " conque-term
 NeoBundle 'rosenfeld/conque-term'
+
+NeoBundle 'bling/vim-airline'
 
