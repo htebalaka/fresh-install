@@ -1,37 +1,52 @@
 
+NeoBundle 'tpope/vim-sensible'
+
 " i only really use easymotion for the s2 key
-Bundle 'Lokaltog/vim-easymotion'
+NeoBundle 'Lokaltog/vim-easymotion'
 
 " fanfingtastic makes f/F/t/T continue past newlines, as well as provides
 " a fanfingtastic_; and fanfingtastic_, to replace the default ;, ,
 " which i've mapped to nN. fanfingtastic doesnt work with spiiph/vim-space
 " unfortunately, which would provide a more versatile nN
-Bundle 'dahu/vim-fanfingtastic'
+NeoBundle 'dahu/vim-fanfingtastic'
+
+" color-scheme
+NeoBundle 'altercation/vim-colors-solarized'
+
+" syntastic 
+NeoBundle 'Syntastic'
+
+NeoBundle 'Shougo/vimproc.vim', {
+            \ 'build' : {
+            \     'windows' : 'tools\\update-dll-mingw',
+            \     'cygwin' : 'make -f make_cygwin.mak',
+            \     'mac' : 'make -f make_mac.mak',
+            \     'linux' : 'make',
+            \     'unix' : 'gmake',
+            \    },
+            \ }
+NeoBundle 'eagletmt/ghcmod-vim'
 
 " vim-repeat makes the . operator work with more plugins, and is a
 " dependency of some other plugins i'm using (i think just easymotion)
-Bundle 'tpope/vim-repeat'
-
-" improves the syntax-based folding in Haskell files
-Bundle 'Twinside/vim-haskellFold'
+NeoBundle 'tpope/vim-repeat'
 
 " displays marks visually in buffers
-Bundle 'kshenoy/vim-signature'
+NeoBundle 'kshenoy/vim-signature'
 
 " man page viewer
-Bundle 'Z1MM32M4N/vim-superman'
+NeoBundle 'Z1MM32M4N/vim-superman'
 
 " intelligently switch between relative and absolute line numbers when in
 " insert mode or other modes
-Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'
 
 " highlight based on variable names rather than variable type
-" Bundle 'jaxbot/semantic-highlight.vim'
+" NeoBundle 'jaxbot/semantic-highlight.vim'
 
 " fish syntax
-Bundle 'dag/vim-fish'
+NeoBundle 'dag/vim-fish'
 
 " conque-term
-Bundle 'rosnefeld/conque-term'
+NeoBundle 'rosenfeld/conque-term'
 
-"Bundle 'benmills/vimux'

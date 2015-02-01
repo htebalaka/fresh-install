@@ -17,3 +17,5 @@ nnoremap <Leader>H :Hoogle<Space>
 nnoremap <Leader>i :HoogleInfo<CR>
 nnoremap <Leader>I :HoogleInfo<Space>
 nnoremap <leader><space> :HoogleClose<CR>:nohlsearch<CR>
+
+set foldmethod=marker

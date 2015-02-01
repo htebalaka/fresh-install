@@ -1,6 +1,9 @@
 
 " highlights the current line
-"set cursorline
+set cursorline
+
+" show line numbers
+set nu
 
 " show matching parens
 set showmatch

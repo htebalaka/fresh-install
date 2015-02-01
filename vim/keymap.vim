@@ -1,5 +1,6 @@
 
 " this file is for leader/command based remappings
+nmap , <Leader>
 
 " retroactive sudo-save
 cmap w!!<CR> w !sudo tee % >/dev/null

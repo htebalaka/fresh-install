@@ -1,5 +1,5 @@
 
-function install-everything
+function install-cabal
     cd ~
 
     # first install the newer version of cabal, and copy the config over. the
@@ -14,7 +14,14 @@ function install-everything
     cabal sandbox init
     curl http://www.stackage.org/lts/cabal.config > ~/cabal.config
     echo "Uncomment out the line in ~/.cabal.config so that we only read from stackage"
-
 end
 
+function install-vim
+    brew install gnu-sed
+    brew install --override-system-vi --with-lua --with-perl --with-python3 vim
 
+    # install neobundle so we can install plugins
+    curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+end
+
+install-cabal
