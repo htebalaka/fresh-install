@@ -8,7 +8,7 @@ function fish_prompt
         printf (set_color red)
         printf "root"
         printf $c0
-        printf ", "
+        printf " "
     end
 
     # Current time
@@ -17,6 +17,7 @@ function fish_prompt
         error last $last_status
         set -ge status
     end
+    printf " "
 
     # Show if the most recent command took over 10 seconds
     if test $CMD_DURATION

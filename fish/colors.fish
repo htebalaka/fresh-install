@@ -13,8 +13,8 @@ set -g c4 (set_color ffffff)
 set -g ce (set_color $fish_color_error)
 
 function _common_section
-    printf $c0
-    printf ", "
+    #printf $c0
+    #printf ", "
     printf $c1
     printf $argv[1]
     printf $c0
@@ -22,6 +22,7 @@ function _common_section
     printf $c2
     printf $argv[2]
     printf $argv[3]
+    printf " "
 end
 
 function section
