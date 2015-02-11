@@ -49,3 +49,5 @@ NeoBundle 'rosenfeld/conque-term'
 
 NeoBundle 'bling/vim-airline'
 
+NeoBundle 'jaxbot/semantic-highlight.vim'
+

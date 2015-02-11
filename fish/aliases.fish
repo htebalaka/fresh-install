@@ -26,6 +26,7 @@ set -gx PATH $PATH $HOME/gits/microbreak/.cabal-sandbox/bin/
 alias ls='ls -AG'
 
 alias ghci='cabal repl'
+alias g='git'
 
 # this function conditionally turns off the current sandbox when creating a
 # new sandbox, so that you can create a sandbox without accidentally nuking

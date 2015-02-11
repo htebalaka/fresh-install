@@ -13,3 +13,8 @@ nnoremap <leader>s :w<cr>:SyntasticCheck<cr>:Errors<cr>
 
 " ,S closes the syntax checker
 nnoremap <leader>S :SyntasticReset<CR>
+
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["c++", "cpp"],
+    \ "passive_filetypes": ["haskell"] }

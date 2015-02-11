@@ -12,12 +12,11 @@ function fish_prompt
     end
 
     # Current time
-    printf (date "+$c2%H$c0:$c2%M$c0:$c2%S")
+    printf (date "+$c2%H$c0:$c2%M$c0:$c2%S ")
     if [ $last_status -ne 0 ]
         error last $last_status
         set -ge status
     end
-    printf " "
 
     # Show if the most recent command took over 10 seconds
     if test $CMD_DURATION
