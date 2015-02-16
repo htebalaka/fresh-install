@@ -45,9 +45,10 @@ NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'
 NeoBundle 'dag/vim-fish'
 
 " conque-term
-NeoBundle 'rosenfeld/conque-term'
+" NeoBundle 'rosenfeld/conque-term'
 
 NeoBundle 'bling/vim-airline'
 
-NeoBundle 'jaxbot/semantic-highlight.vim'
+" vim-tmux-navigator
+NeoBundle 'christoomey/vim-tmux-navigator'
 
