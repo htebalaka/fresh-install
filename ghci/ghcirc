@@ -1,6 +1,0 @@
-
--- i don't really use these much anymore, now that vim is working better
-:source gits/fresh-install/ghci/macros
-
--- this should be last, so that anything imported in interactive doesn't clash with the definitions in the above files
-:source gits/fresh-install/ghci/interactive

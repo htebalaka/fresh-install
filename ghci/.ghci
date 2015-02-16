@@ -1,2 +1,13 @@
-:def source \x -> readFile . (++x) . (++"/") =<< System.Directory.getHomeDirectory
-:source gits/fresh-install/ghci/ghcirc
+
+:seti -XLambdaCase
+:seti -XNoMonomorphismRestriction
+:seti -XGADTs
+:seti -XTypeFamilies
+
+-- these two don't work well with :seti
+:set prompt "\ESC[34m%s\ESC[0m\nλ> "
+:set -XNoImplicitPrelude
+import BasePrelude
+
+:def hoogle \str -> return . indent $ ":! hoogle --count=15 \"" ++ str ++ "\""
+
