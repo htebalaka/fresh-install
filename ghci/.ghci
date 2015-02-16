@@ -9,5 +9,5 @@
 :set -XNoImplicitPrelude
 import BasePrelude
 
-:def hoogle \str -> return . indent $ ":! hoogle --count=15 \"" ++ str ++ "\""
+:def hoogle \str -> return $ ":! hoogle --count=15 \"" ++ str ++ "\""
 

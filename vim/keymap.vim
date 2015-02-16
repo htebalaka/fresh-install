@@ -1,6 +1,8 @@
 
 " this file is for leader/command based remappings
-map <Leader> ,
+map <Leader> \
+
+map <Leader>r :source ~/.vimrc<cr>
 
 " retroactive sudo-save
 cmap w!!<CR> w !sudo tee % >/dev/null
