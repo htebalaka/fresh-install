@@ -31,6 +31,7 @@ source ~/gits/fresh-install/vim/plugins/syntastic.vim
 source ~/gits/fresh-install/vim/plugins/tagbar.vim
 source ~/gits/fresh-install/vim/plugins/airline.vim
 source ~/gits/fresh-install/vim/plugins/hardtime.vim
+source ~/gits/fresh-install/vim/plugins/unite.vim
 
 " source language specific settings
 autocmd FileType haskell source ~/gits/fresh-install/vim/lang/haskell.vim

@@ -1,7 +1,7 @@
 
 " this file is for leader/command based remappings
-map <Leader> \
-nnoremap <Space> :
+let mapleader = "\<space>\<space>"
+noremap <space> :
 
 " toggle a fold, or close all folds
 nnoremap <Leader>f za
@@ -20,9 +20,7 @@ nnoremap :d<CR> :Bd<CR>
 nnoremap :wd<CR> :w<CR>:Bd<CR>
 nnoremap :d!<CR> :Bd!<CR>
 
-" prompts for a buffer name. {b}ackwards is remapped to W to be more consistent
-" with other operators
-nnoremap b :buffer<space>
+nnoremap <leader>b :buffers<cr>
 
 " switches to the previous buffer. {B}ackwards is remapped to gW, using g more
 " consistently tindicate WORD

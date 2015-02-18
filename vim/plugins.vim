@@ -25,7 +25,9 @@ NeoBundle 'Shougo/vimproc.vim', {
             \     'unix' : 'gmake',
             \    },
             \ }
-NeoBundle 'eagletmt/ghcmod-vim'
+"NeoBundle 'eagletmt/ghcmod-vim'
+"NeoBundle 'eagletmt/neco-ghc'
+"NeoBundle 'dag/vim2hs'
 
 " vim-repeat makes the . operator work with more plugins, and is a
 " dependency of some other plugins i'm using (i think just easymotion)
@@ -57,3 +59,9 @@ NeoBundle 'vasconcelloslf/vim-interestingwords'
 nnoremap <Leader>h :call InterestingWords('n')<cr>
 vnoremap <leader>h :call InterestingWords('v')<cr>
 noremap <Leader>H :call UncolorAllWords()<cr>
+
+"NeoBundle 'Shougo/neocomplete.vim'
+
+NeoBundle 'Shougo/unite.vim'
+noremap <leader>u :Unite file buffer<cr>
+
