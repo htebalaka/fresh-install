@@ -1,4 +1,10 @@
 
+" dont save swap files
+set noswapfile
+
+" show whitespace
+set list
+
 " highlights the current line
 set cursorline
 augroup CursorLineOnlyInActiveWindow

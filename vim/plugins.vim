@@ -13,7 +13,7 @@ NeoBundle 'dahu/vim-fanfingtastic'
 " color-scheme
 NeoBundle 'altercation/vim-colors-solarized'
 
-" syntastic 
+" syntastic
 NeoBundle 'Syntastic'
 
 NeoBundle 'Shougo/vimproc.vim', {
@@ -52,3 +52,8 @@ NeoBundle 'bling/vim-airline'
 " vim-tmux-navigator
 NeoBundle 'christoomey/vim-tmux-navigator'
 
+" highlights words that are the same as the one under the cursor
+NeoBundle 'vasconcelloslf/vim-interestingwords'
+nnoremap <Leader>h :call InterestingWords('n')<cr>
+vnoremap <leader>h :call InterestingWords('v')<cr>
+noremap <Leader>H :call UncolorAllWords()<cr>

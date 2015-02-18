@@ -1,6 +1,11 @@
 
 " this file is for leader/command based remappings
 map <Leader> \
+nnoremap <Space> :
+
+" toggle a fold, or close all folds
+nnoremap <Leader>f za
+nnoremap <Leader>F zM
 
 map <Leader>r :source ~/.vimrc<cr>
 
@@ -8,7 +13,7 @@ map <Leader>r :source ~/.vimrc<cr>
 cmap w!!<CR> w !sudo tee % >/dev/null
 
 " set space to insert a single character under the cursor, works by entering
-nnoremap <space> i<space><esc>r
+" nnoremap <space> i<space><esc>r
 
 " closes the current buffer, without closing the window pane
 nnoremap :d<CR> :Bd<CR>

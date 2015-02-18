@@ -1,9 +1,0 @@
-
-# opens three splits, one wide for vim, one for a big terminal, and a small
-# terminal
-split-window -h -t 0       # split horizontally
-resize-pane -t 0 -x 84     # set the left window to 84-wide
-#select-window -t 1         # -- might be redundent
-split-window -v -p 25 -t 1 # split the right window as a percentage
-select-pane -t 0           # select left window
-

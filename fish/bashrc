@@ -35,6 +35,9 @@ export PATH=$PATH:$HOME/gits/haskell-sandbox/.cabal-sandbox/bin/
 export PATH=$PATH:$HOME/gits/new-prelude/.cabal-sandbox/bin
 export PATH=$PATH:$HOME/gits/microbreak/.cabal-sandbox/bin
 
+# add tmux functions
+export PATH=$PATH:$HOME/gits/tmux/dev-tmux
+
 # Added by Canopy installer on 2014-09-30
 # VIRTUAL_ENV_DISABLE_PROMPT can be set to '' to make bashprompt show that Canopy is active, otherwise 1
 VIRTUAL_ENV_DISABLE_PROMPT='' source ${HOME}/Library/Enthought/Canopy_64bit/User/bin/activate

@@ -45,4 +45,11 @@ function cabal
     command cabal $argv
 end
 
-
+# opens three splits, one wide for vim, one for a big terminal, and one for a
+# small terminal
+function dev-tmux
+    tmux split-window -h -t 0
+    tmux resize-pane -t 0 -x 84
+    tmux split-window -v -p 25 -t 1
+    tmux select-pane -t 0
+end
