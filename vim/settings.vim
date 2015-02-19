@@ -30,4 +30,7 @@ set incsearch
 set winwidth=86
 
 " fold based on {{{ }}} markers
-set foldmethod=marker
+set foldmethod=manual
+
+" color the 80th column
+" set colorcolumn=80

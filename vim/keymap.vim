@@ -1,7 +1,6 @@
 
 " this file is for leader/command based remappings
-let mapleader = "\<space>\<space>"
-noremap <space> :
+let mapleader = "\<space>"
 
 " toggle a fold, or close all folds
 nnoremap <Leader>f za

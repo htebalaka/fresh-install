@@ -25,6 +25,9 @@ NeoBundle 'Shougo/vimproc.vim', {
             \     'unix' : 'gmake',
             \    },
             \ }
+NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'Shougo/vimfiler.vim'
+
 "NeoBundle 'eagletmt/ghcmod-vim'
 "NeoBundle 'eagletmt/neco-ghc'
 "NeoBundle 'dag/vim2hs'
@@ -46,9 +49,6 @@ NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'
 " fish syntax
 NeoBundle 'dag/vim-fish'
 
-" conque-term
-" NeoBundle 'rosenfeld/conque-term'
-
 NeoBundle 'bling/vim-airline'
 
 " vim-tmux-navigator
@@ -60,8 +60,8 @@ nnoremap <Leader>h :call InterestingWords('n')<cr>
 vnoremap <leader>h :call InterestingWords('v')<cr>
 noremap <Leader>H :call UncolorAllWords()<cr>
 
-"NeoBundle 'Shougo/neocomplete.vim'
+" gundo requires python2.4 :(
+"NeoBundle 'sjl/gundo.vim'
 
-NeoBundle 'Shougo/unite.vim'
-noremap <leader>u :Unite file buffer<cr>
+"NeoBundle 'Shougo/neocomplete.vim'
 
