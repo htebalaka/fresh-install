@@ -1,4 +1,7 @@
 
+" allow switching between buffers without saving
+set hidden
+
 " dont save swap files
 set noswapfile
 
