@@ -9,7 +9,7 @@ call unite#custom#source('file_rec/async,grep',
 
 " this doesn't wor
 " call unite#custom#source('file_rec/async,grep,buffer,line',
-    \ 'filters','matcher_fuzzy')
+"    \ 'filters','matcher_fuzzy')
 
 " Use ag for search
 if executable('ag')
@@ -19,18 +19,32 @@ if executable('ag')
 endif
 
 " keymaps
+"   /  current file
+"   {b|B} {current buffers|recent buffers} via filename
+"   {u|U} {current project|all gits} via filename
+"   {a|A} {current project|all gits} via grep
 map <leader>/ :Unite -start-insert -winheight=10 -buffer-name=/ line<cr>
 map <leader>b :Unite -start-insert -winheight=10 -buffer-name=buffers buffer<cr>
-map <leader>U :execute ':Unite -buffer-name=ag -no-split
+map <leader>B :Unite -start-insert -winheight=10 -buffer-name=recent bookmark<cr>
+map <leader>a :execute ':Unite -buffer-name=ag -no-split
     \ -auto-preview -truncate -winheight=30
     \ grep:'.unite#util#path2project_directory(getcwd())<cr>
+map <leader>A :execute ':Unite -buffer-name=ag -no-split
+    \ -auto-preview -truncate -winheight=30
+    \ grep:~/gits'<cr>
 map <leader>u :execute ':Unite -buffer-name=files -start-insert
     \ -winheight=10
     \ file_rec/async:'.unite#util#path2project_directory(getcwd())<cr>
+map <leader>U :execute ':Unite -buffer-name=files -start-insert
+    \ -winheight=10
+    \ file_rec/async:~/gits'<cr>
 
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
     map <buffer> d <noop>
     map <buffer> <space> <leader>
+
+    " tab opens in split
+    imap <silent><buffer><expr> <tab> unite#do_action('vsplit')
 endfunction
 
