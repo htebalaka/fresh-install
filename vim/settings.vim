@@ -8,6 +8,10 @@ set noswapfile
 " show whitespace
 set list
 
+" disable errorbells
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
 " highlights the current line
 set cursorline
 augroup CursorLineOnlyInActiveWindow
