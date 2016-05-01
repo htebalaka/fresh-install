@@ -26,11 +26,9 @@ NeoBundle 'Shougo/vimproc.vim', {
             \     'unix' : 'gmake',
             \    },
             \ }
-" smart searching
+" smart searching, with extensions for most-recent-fil
 NeoBundle 'Shougo/unite.vim'
-" most recently used files, used by unite
-NeoBundle 'yegappan/mru'
-" NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/neomru.vim'
 
 " NeoBundle 'eagletmt/ghcmod-vim'
 " NeoBundle 'eagletmt/neco-ghc'
