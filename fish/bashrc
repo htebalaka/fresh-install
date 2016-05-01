@@ -34,6 +34,7 @@ source ${HOME}/gits/fresh-install/bash/ps1.sh
 export PATH=$PATH:$HOME/gits/haskell-sandbox/.cabal-sandbox/bin/
 export PATH=$PATH:$HOME/gits/new-prelude/.cabal-sandbox/bin
 export PATH=$PATH:$HOME/gits/microbreak/.cabal-sandbox/bin
+export PATH=$PATH:$HOME/.local/bin
 
 # add tmux functions
 export PATH=$PATH:$HOME/gits/tmux/dev-tmux

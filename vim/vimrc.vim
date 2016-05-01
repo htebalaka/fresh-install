@@ -39,4 +39,5 @@ autocmd FileType python source ~/gits/fresh-install/vim/lang/python.vim
 autocmd FileType cpp source ~/gits/fresh-install/vim/lang/cpp.vim
 
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4
+hi MatchParen cterm=none ctermbg=green ctermfg=blue
 

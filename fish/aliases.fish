@@ -1,4 +1,8 @@
 
+function ghcif
+    ghcid --command="stack ghci $argv"
+end
+
 function man
     vim -c "SuperMan $argv"
     if [ "$status" != "0" ]
@@ -13,6 +17,7 @@ end
 # for the newer for the time being
 set -gx PATH $HOME/.cabal-sandbox/bin $PATH
 set -gx PATH $HOME/Library/Haskell/bin $PATH
+set -gx PATH $HOME/.local/bin $PATH
 
 # this is necessary to ensure that after installing vim we are running the
 # correct version. this might /not/ be necessary with the new vim install
@@ -49,7 +54,7 @@ end
 # small terminal
 function dev-tmux
     tmux split-window -h -t 0
-    tmux resize-pane -t 0 -x 84
+    #tmux resize-pane -t 0 -x 84
     tmux split-window -v -p 25 -t 1
     tmux select-pane -t 0
 end

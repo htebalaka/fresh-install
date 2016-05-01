@@ -1,13 +1,50 @@
 
+-- syntax plugins
+:seti -XBangPatterns
+:seti -XBinaryLiterals
+:seti -XExplicitNamespaces
 :seti -XLambdaCase
-:seti -XNoMonomorphismRestriction
-:seti -XGADTs
-:seti -XTypeFamilies
+:seti -XMagicHash
+:seti -XMultiWayIf
+:seti -XNamedFieldPuns
+:seti -XNumDecimals
+:seti -XPatternGuards
+:seti -XParallelListComp
+:seti -XRecordWildCards
+:seti -XTupleSections
+:seti -XViewPatterns
 
+-- semantic plugins
+:seti -XConstraintKinds
+:seti -XDataKinds
+:seti -XDeriveDataTypeable
+:seti -XDeriveGeneric
+:seti -XFlexibleContexts
+:seti -XFunctionalDependencies
+:seti -XGADTs
+:seti -XInstanceSigs
+:seti -XKindSignatures
+:seti -XLiberalTypeSynonyms
+:seti -XMultiParamTypeClasses
+:seti -XNoMonomorphismRestriction
+:seti -XNamedWildCards
+:seti -XPatternSynonyms
+:seti -XPartialTypeSignatures
+:seti -XPolyKinds
+:seti -XRankNTypes
+:seti -XRecursiveDo
+:seti -XScopedTypeVariables
+:seti -XStandaloneDeriving
+:seti -XTypeFamilies
+:seti -XTypeOperators
+:seti -XUnboxedTuples
+
+:seti -Wnot -Werror
 -- these two don't work well with :seti
+-- :set -XNoImplicitPrelude
 :set prompt "\ESC[34m%s\ESC[0m\nλ> "
-:set -XNoImplicitPrelude
-import BasePrelude
+-- import BasicPrelude
+import Control.Lens
 
 :def hoogle \str -> return $ ":! hoogle --count=15 \"" ++ str ++ "\""
 

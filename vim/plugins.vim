@@ -13,6 +13,7 @@ NeoBundle 'dahu/vim-fanfingtastic'
 " color-scheme
 NeoBundle 'altercation/vim-colors-solarized'
 
+
 " syntastic
 NeoBundle 'Syntastic'
 
@@ -25,12 +26,17 @@ NeoBundle 'Shougo/vimproc.vim', {
             \     'unix' : 'gmake',
             \    },
             \ }
+" smart searching
 NeoBundle 'Shougo/unite.vim'
+" most recently used files, used by unite
+NeoBundle 'yegappan/mru'
 " NeoBundle 'Shougo/vimfiler.vim'
 
-"NeoBundle 'eagletmt/ghcmod-vim'
-"NeoBundle 'eagletmt/neco-ghc'
-"NeoBundle 'dag/vim2hs'
+" NeoBundle 'eagletmt/ghcmod-vim'
+" NeoBundle 'eagletmt/neco-ghc'
+" NeoBundle 'dag/vim2hs'
+
+" NeoBundle 'vim-haskellFold'
 
 " vim-repeat makes the . operator work with more plugins, and is a
 " dependency of some other plugins i'm using (i think just easymotion)

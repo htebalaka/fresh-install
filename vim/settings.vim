@@ -34,10 +34,10 @@ set nohlsearch
 set incsearch
 
 " increase width so that left window has >80 chars width
-set winwidth=86
+" set winwidth=86
 
-" fold based on {{{ }}} markers
-set foldmethod=manual
+" color the 81st column
+set colorcolumn=81
 
-" color the 80th column
-" set colorcolumn=80
+" change default matching parentheses color indicator
+hi MatchParen cterm=none ctermbg=green ctermfg=blue

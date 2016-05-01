@@ -5,7 +5,8 @@ call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('file_rec/async,grep,buffer,line',
     \ 'sorters','sorter_rank')
 call unite#custom#source('file_rec/async,grep',
-    \ 'ignore_pattern', '\v' . '.cabal-sandbox' . '|' . 'dist/')
+    \ 'ignore_pattern', '\v' . '.cabal-sandbox' . '|' . 'dist/' . '|' . '.stack-work'
+    \ . '|' . '.antigen/' . '|' . '.cabal')
 
 " this doesn't wor
 " call unite#custom#source('file_rec/async,grep,buffer,line',
@@ -24,8 +25,9 @@ endif
 "   {u|U} {current project|all gits} via filename
 "   {a|A} {current project|all gits} via grep
 map <leader>/ :Unite -start-insert -winheight=10 -buffer-name=/ line<cr>
-map <leader>b :Unite -start-insert -winheight=10 -buffer-name=buffers buffer<cr>
+map <leader>b :Unite -start-insert -no-split -buffer-name=buffers buffer<cr>
 map <leader>B :Unite -start-insert -winheight=10 -buffer-name=recent bookmark<cr>
+map <leader>r :Unite -start-insert -no-split -buffername=mru file_mru<cr>
 map <leader>a :execute ':Unite -buffer-name=ag -no-split
     \ -auto-preview -truncate -winheight=30
     \ grep:'.unite#util#path2project_directory(getcwd())<cr>
