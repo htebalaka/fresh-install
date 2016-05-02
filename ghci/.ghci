@@ -43,7 +43,9 @@
 -- these two don't work well with :seti
 -- :set -XNoImplicitPrelude
 :set prompt "\ESC[34m%s\ESC[0m\nλ> "
--- import BasicPrelude
+:seti -XNoImplicitPrelude
+import BasePrelude
+import MTLPrelude
 import Control.Lens
 
 :def hoogle \str -> return $ ":! hoogle --count=15 \"" ++ str ++ "\""

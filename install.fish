@@ -32,7 +32,7 @@ function set-rc-files
     # vim
     echo 'source ~/gits/fresh-install/vim/vimrc.vim' > '~/.vimrc'
     # ghci
-    echo ':def source readFile\n:source ~/gits/fresh-install/ghci/.ghci' > '~/.ghci'
+    echo ':def source readFile\n:source /Users/malcolmgooding/gits/fresh-install/ghci/.ghci' > '~/.ghci'
     # git
     echo '[include]\n    path = ~/gits/fresh-install/git/config' > '~/.gitconfig'
     # tmux
