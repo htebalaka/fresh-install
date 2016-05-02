@@ -5,8 +5,8 @@ call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('file_rec/async,grep,buffer,line',
     \ 'sorters','sorter_rank')
 call unite#custom#source('file_rec/async,grep',
-    \ 'ignore_pattern', '\v' . '.cabal-sandbox' . '|' . 'dist/' . '|' . '.stack-work'
-    \ . '|' . '.antigen/' . '|' . '.cabal')
+    \ 'ignore_pattern', '\v' . '.cabal-sandbox' . '|' . 'dist/'
+    \ . '|' .  '.stack-work/' . '|' . '.antigen/' . '|' . '.cabal/')
 
 " this doesn't wor
 " call unite#custom#source('file_rec/async,grep,buffer,line',
@@ -20,16 +20,24 @@ if executable('ag')
 endif
 
 " i'm undecided if i prefer -no-split or -winheight=10
+" unite features i like:
+"   buffer
+"   file_mru
+"   file_rec/async:{!/*}
+"   grep:{!/*}
+"   line
+"   register?
 map <leader>b :Unite buffer
     \ -start-insert -no-split -buffer-name=buffers<cr>
 map <leader>B :Unite bookmark
     \ -start-insert -no-split -buffer-name=recent<cr>
 map <leader>y :Unite register
     \ -start-insert -no-split -buffer-name=yanks<cr>
-map <leader>u :Unite file_mru file_rec/async:!
+map <leader>u :Unite file_mru file_rec/async:! -unique
     \ -start-insert -no-split -buffer-name=files<cr>
-map <leader>U :Unite file_rec/async:~/gits
-    \ -start-insert -no-split -buffer-name=files<cr>
+map <leader>U :Unite -unique -start-insert -no-split -buffer-name=files file_rec/async:~/
+"map <leader>U :Unite file_rec/async:~/gits -unique
+"    \ -start-insert -no-split -buffer-name=files<cr>
 map <leader>/ :Unite line -auto-preview
     \ -start-insert -no-split -buffer-name=/<cr>
 map <leader>a :Unite grep:! -auto-preview -truncate
@@ -41,8 +49,5 @@ autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
     map <buffer> d <noop>
     map <buffer> <space> <leader>
-
-    " tab opens in split
-    imap <silent><buffer><expr> <tab> unite#do_action('vsplit')
 endfunction
 

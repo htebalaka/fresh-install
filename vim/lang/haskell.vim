@@ -28,14 +28,22 @@ set foldexpr=GetPositionFold(v:lnum)
 set foldtext=CustomFoldText()
 set foldminlines=2
 
-function CustomFoldText()
+function! CustomFoldText()
     let cursor = v:foldstart
     let line = getline(cursor)
+
+    let isComment = 0
     " find the first non-comment line
-    while line =~ '\v^\s*--'
+    while line =~ '\v^\s*\-\-'
         let cursor += 1
         let line = getline(cursor)
+        let isComment = 1
     endwhile
+
+    " raise an alert if a top-level identifier is uncommented
+    if (IndentLevel(cursor) < 0) && (isComment == 0)
+        return repeat('!', 100)
+    endif
 
     if (line =~ '\v^data') || (line =~ '\v^newtype)
         " pass
@@ -63,13 +71,13 @@ function! IndentLevel(lnum)
 endfunction
 
 function! IsHaddockPreamble(lnum)
-    let hOpen = '\v^\s*\-\-\s\|'
-    let open = '\v^\s*\-\-\s'
+    let hComment = '\v^\s*\-\-\s\|'
+    let comment = '\v^\s*\-\-'
 
     let contents = getline(a:lnum)
 
-    if (contents =~ open)
-        if (contents =~ hOpen)
+    if (contents =~ comment)
+        if (contents =~ hComment)
             return 1
         else
             return IsHaddockPreamble(a:lnum - 1)
@@ -79,7 +87,7 @@ function! IsHaddockPreamble(lnum)
     endif
 endfunction
 
-function IsTypeSignature(lnum)
+function! IsTypeSignature(lnum)
     let contents = getline(a:lnum)
     if contents =~ '\v^\s*\S+\s::'
         return 1

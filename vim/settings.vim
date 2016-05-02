@@ -36,8 +36,5 @@ set incsearch
 " increase width so that left window has >80 chars width
 " set winwidth=86
 
-" color the 81st column
-set colorcolumn=81
-
 " change default matching parentheses color indicator
 hi MatchParen cterm=none ctermbg=green ctermfg=blue

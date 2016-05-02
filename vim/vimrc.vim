@@ -37,6 +37,11 @@ source ~/gits/fresh-install/vim/plugins/unite.vim
 autocmd FileType haskell source ~/gits/fresh-install/vim/lang/haskell.vim
 autocmd FileType python source ~/gits/fresh-install/vim/lang/python.vim
 autocmd FileType cpp source ~/gits/fresh-install/vim/lang/cpp.vim
+autocmd FileType vim,haskell,python,cpp call s:vim_my_syntax()
+function! s:vim_my_syntax()
+    highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+    match OverLength /\%81v.\+/
+endfunction
 
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 hi MatchParen cterm=none ctermbg=green ctermfg=blue

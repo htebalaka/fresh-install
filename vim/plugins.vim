@@ -39,6 +39,7 @@ NeoBundle 'Shougo/neomru.vim'
 " vim-repeat makes the . operator work with more plugins, and is a
 " dependency of some other plugins i'm using (i think just easymotion)
 NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-surround'
 
 " displays marks visually in buffers
 NeoBundle 'kshenoy/vim-signature'
