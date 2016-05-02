@@ -20,9 +20,11 @@ function fish_prompt
 
     # Show if the most recent command took over 10 seconds
     if test $CMD_DURATION
-        set -l taken (echo $CMD_DURATION | sed -n 's/.[0-9]*s//p')
-        if test $taken -gt 10
+        # drop the millisecond portion of CMD_DURATION
+        set -l taken (echo $CMD_DURATION | sed -n 's/...$/s/p')
+        if test $CMD_DURATION -gt 10000
             error taken $taken
+            # this doesnt seem to make noise anymore
             tput bel
         end
     end

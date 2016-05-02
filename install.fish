@@ -24,4 +24,18 @@ function install-vim
     curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 end
 
-install-cabal
+# this function sets various applications' config files to source the config
+# files in the fresh-install project
+function set-rc-files
+    # fish
+    echo 'source ~/gits/fresh-install/fish/fishrc.fish' > '~/.config/fish/config.fish'
+    # vim
+    echo 'source ~/gits/fresh-install/vim/vimrc.vim' > '~/.vimrc'
+    # ghci
+    echo ':def source readFile\n:source ~/gits/fresh-install/ghci/.ghci' > '~/.ghci'
+    # git
+    echo '[include]\n    path = ~/gits/fresh-install/git/config' > '~/.gitconfig'
+    # tmux
+    echo 'source-file ~/gits/fresh-install/tmux/tmux.conf' > '~/.tmux.conf'
+end
+
