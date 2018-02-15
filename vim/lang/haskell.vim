@@ -28,36 +28,45 @@ set foldexpr=GetPositionFold(v:lnum)
 set foldtext=CustomFoldText()
 set foldminlines=2
 
+
+
 function! CustomFoldText()
     let cursor = v:foldstart
     let line = getline(cursor)
 
-    let isComment = 0
-    " find the first non-comment line
-    while line =~ '\v^\s*\-\-'
-        let cursor += 1
-        let line = getline(cursor)
-        let isComment = 1
-    endwhile
-
-    " raise an alert if a top-level identifier is uncommented
-    if (IndentLevel(cursor) < 0) && (isComment == 0)
-        return repeat('!', 100)
+    " if the line opens a haddock comment find the declaration
+    if line =~ '^ *-- |'
+        let isComment = 0
+        " find the first non-comment line
+        while line =~ '\v^\s*\-\-'
+            let cursor += 1
+            let line = getline(cursor)
+            let isComment = 1
+        endwhile
+    elseif line =~ '^ *-- =\+'
+        " the fold opens a header, so just use the line
+        return line . repeat(' ', 100)
     endif
 
-    if (line =~ '\v^data') || (line =~ '\v^newtype)
-        " pass
+    if (line =~ '\v^data') || (line =~ '\v^newtype') || (line =~ '^class') || (line =~ '^instance')
+        " the line opens a non-value level declaration
+        if (line =~ '^data') || (line =~ '^newtype')
+            let line = substitute(line, ' =.*$', '', '')
+        endif
+        let line = substitute(line, ' where.*$', '', '')
+        return line . repeat(' ', 100)
     else
         " the line is a type, get the full type signature
+        " ^ should be tested, and otherwise use the top line
         let currIndent = IndentLevel(cursor)
-        " append any indented lines to the 'line' variable
+        " any indented lines following the beginning of a type signature
+        " are assumed to be a part of it, so we append them
         while IndentLevel(cursor+1) == (currIndent + 1)
             let cursor += 1
             let line = line . substitute(getline(cursor), '^\s*', ' ', '')
         endwhile
+        return line . repeat(' ', 100)
     endif
-
-    return line . repeat(' ', 100)
 
     let width = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
     let foldSize = 1 + v:foldend - v:foldstart
@@ -91,23 +100,24 @@ function! IsTypeSignature(lnum)
     let contents = getline(a:lnum)
     if contents =~ '\v^\s*\S+\s::'
         return 1
-    elseif
-        (contents =~ '\v^\s*\S+$') && (getline(a:lnum+1) =~ '\v^\s*::')
+    elseif (contents =~ '\v^\s*\S+$') && (getline(a:lnum+1) =~ '\v^\s*::')
         return 1
     else
         return 0
     endif
 endfunction
 
-" a line introducing a binding in a where block is >t
+" a line introducting a type signature (or followed by a where) is >t
 " a line introducing a toplevel binding is >1
-" an indented line after a data/newtype is >1
+" an indented line after a data/newtype/class/instance is >t
+" a line with a haddock header is >t
 function! GetPositionFold(lnum)
     let prevContents = getline(a:lnum-1)
     let lineContents = getline(a:lnum)
 
     let openHaddock = '\v^\s*--\s\|'
     let openMultiHaddock = '\v\s*\{\-\s\|'
+    let header = '\v^\s*--\s=+'
     let openComment = '\v^s*\-\-'
     let closeMultiComment = '\v\s*\-\}'
     let data = '\v^data '
@@ -117,11 +127,18 @@ function! GetPositionFold(lnum)
 
     if (lineContents =~ openHaddock) || (lineContents =~ openMultiHaddock)
         return ('>' . (IndentLevel(a:lnum) + 1))
+    elseif (lineContents =~ '^ *-- =\+')
+        let headerLevel = strlen(matchlist(lineContents, '^ *-- \(=\+\)')[1])
+        let foldLevel = headerLevel + IndentLevel(a:lnum) + 1
+        return ('>' . foldLevel)
     elseif IsHaddockPreamble(a:lnum-1)
         return '='
-    elseif (lineContents =~ typedec)
+    elseif IsTypeSignature(a:lnum)
+        " (lineContents =~ typedec)
         return ('>' . (IndentLevel(a:lnum) + 1))
-    elseif (lineContents =~ data) || (lineContents =~ newtype)
+    elseif (lineContents =~ data) || (lineContents =~ newtype) ||
+            \ (lineContents =~ '^class ') ||
+            \ (lineContents =~ '^instance ')
         if IndentLevel(a:lnum+1)
             return ('>' . (IndentLevel(a:lnum) + 1))
         else

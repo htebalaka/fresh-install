@@ -7,13 +7,17 @@ function if_osx {
   fi
 }
 
-function man {
-    vim -c "SuperMan $*"
-
-    if [ "$?" != "0" ]; then
-        echo "No manual entry for $*"
-    fi
+function haddock {
+    stack haddock --open $1
 }
+
+#function man {
+#    vim -c "SuperMan $*"
+#
+#    if [ "$?" != "0" ]; then
+#        echo "No manual entry for $*"
+#    fi
+#}
 
 # add bash functions
 #source "${HOME}/gits/fresh-install/profile/profile.all"

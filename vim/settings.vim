@@ -37,4 +37,5 @@ set incsearch
 " set winwidth=86
 
 " change default matching parentheses color indicator
-hi MatchParen cterm=none ctermbg=green ctermfg=blue
+hi MatchParen cterm=none ctermbg=none ctermfg=blue
+" hi MatchParen cterm=none ctermbg=green ctermfg=blue

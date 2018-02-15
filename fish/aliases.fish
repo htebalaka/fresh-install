@@ -3,6 +3,10 @@ function ghcif
     ghcid --command="stack ghci $argv"
 end
 
+function haddock
+    stack haddock --open #argv[0]
+end
+
 function man
     vim -c "SuperMan $argv"
     if [ "$status" != "0" ]

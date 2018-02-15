@@ -33,7 +33,7 @@ map <leader>B :Unite bookmark
     \ -start-insert -no-split -buffer-name=recent<cr>
 map <leader>y :Unite register
     \ -start-insert -no-split -buffer-name=yanks<cr>
-map <leader>u :Unite file_mru file_rec/async:! -unique
+map <leader>u :Unite file_rec/async:! -unique
     \ -start-insert -no-split -buffer-name=files<cr>
 map <leader>U :Unite -unique -start-insert -no-split -buffer-name=files file_rec/async:~/
 "map <leader>U :Unite file_rec/async:~/gits -unique
