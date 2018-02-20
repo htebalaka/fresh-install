@@ -1,4 +1,5 @@
 
+
 if !1 | finish | endif
 if has('vim_starting')
   if &compatible
@@ -43,6 +44,8 @@ function! s:vim_my_syntax()
     "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
     match OverLength /\%81v.\+/
 endfunction
+
+autocmd FileType vim,tmux set foldmethod=marker
 
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 hi MatchParen cterm=none ctermbg=none ctermfg=blue
