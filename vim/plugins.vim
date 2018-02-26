@@ -1,6 +1,10 @@
 
 NeoBundle 'tpope/vim-sensible'
 
+NeoBundle 'tpope/vim-markdown'
+" autocmd BufNewFile,BufReadPost *.mkd set filetype=markdown
+NeoBundle 'nelstrom/vim-markdown-folding'
+
 " i only really use easymotion for the s2 key
 NeoBundle 'Lokaltog/vim-easymotion'
 
