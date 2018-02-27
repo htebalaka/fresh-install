@@ -1,0 +1,8 @@
+
+templates:
+  params:
+    author-email: alicegooding@gmail.com
+    author-name: Alice Gooding
+    copyright: 2018 Alice Gooding
+    github-username: alicegooding
+    category: Development

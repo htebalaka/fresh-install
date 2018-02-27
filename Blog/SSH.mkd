@@ -1,0 +1,49 @@
+
+# Fingerprint Checking
+
+Whenever you log into a new server for the first time SSH shows you the server fingerprint, which identifies the server, and ask if you want to connect. Before connecting verify that the fingerprint is correct, which can be found on the server itself with the command:
+
+```
+user@server: ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
+```
+
+There may be multiple public keys in this folder, so you may need to check against multiple ones. If the fingerprint that SSH shows you isn't in the list then don't connect. Once you hve connected SSH will no longer prompt you in the future, unless the fingerprint changes. This a warning that something is up.
+
+You can check the fingerprints that the client trusts with the following command:
+
+```
+user@client: ssh-keygen -lf ~/.ssh/known_hosts
+
+```
+
+Rather than displaying the fingerprints as a string, you can have SSH display them as a ASCII art, which can make them more memorable. This is useful if connecting to a computer you frequently connect to, but from a new computer, as recognizing the fingerprint as correct from memory is difficult. To always display the fingerprint as ASCII art edit the following file
+
+`user@client: ~/.ssh.config`
+```
+> VisualHostKey=yes
+```
+
+This will also display the fingerprint every login attempt, though you will still receive a notification if the fingerprint has changed. Seeing it every login is again useful if connecting from a new computer, as you will be more likely to remember the ASCII art image if you've seen it many times before.
+
+Note, if you are connecting to a server through a new name (e.g. the fingerprint is the same but you are connecting through a different IP) you will be notified that it's unrecognized.
+
+# Configure your router and DNS
+
+You want to configure your router to make your private IP address static, and set port forwarding to forward to that IP. To find your MAC address use either of the following commands: `ifconfig | grep ether` or `ip link`.
+
+Once done, you need to get your public IP address:
+
+```
+curl 'https://api.ipify.org'
+dig +short myip.opendns.com @resolver1.opendns.com
+```
+
+and then login with `ssh -l {userName} {publicIP} -p {portNumber}`.
+
+
+
+# Multi-Factor Authentication
+
+Consider a Yubikey with U2F.
+
+

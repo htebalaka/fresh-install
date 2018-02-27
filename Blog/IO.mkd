@@ -1,0 +1,399 @@
+
+Let's suppose we wanted to add the an `ifThenElse` function to Python. It
+would probably look something like this:
+
+    def ifThenElse(bool, t, f):
+      if bool:
+        return t
+      else:
+        return f
+
+    def putStrLn(x):
+      print(x)
+      return None
+
+
+Now Python is a strict language, so this function does more work than it needs
+to. But it has an even bigger problem than heating up our computer. It actually
+does the wrong thing.
+
+    ifThenElse(b, putStrLn("Hello"), putStrLn("Goodbye"))
+
+As a Python programmer you might say this is simply because Haskell is lazy,
+but it actually isn't. Though you wouldn't do things this way in Python, you
+could still get the right answer with a slight change in how you view IO.
+
+We'll get to why we would do that later. Let's just see how:
+
+    def putStrLn(x):
+      def IO():
+        print(x)
+        return None
+      return IO
+
+Now when we call `putStrLn("Hello")` we don't do any IO; rather, we return a
+printer object which, when called, does some IO. And when we want to actually
+execute the code we can simply add one extra function call to it:
+
+    putStrLn("Hello world")()
+
+`ifThenElse` could be changed to:
+
+    def ifThenElse(b, t, f):
+      if b:
+        return t()
+      else:
+        return f()
+
+But then it wouldn't work if we do things like `ifThenElse(b, 1 + 1, 1 + 2)`,
+so we'll leave it up to the caller to execute the returned printer.
+
+    def main():
+        putStrLn("Are you coming or going?")()
+        x = readline()
+        ifThenElse(b, putStrLn("Hello"), putStrLn("Goodbye"))()
+
+We could even wrap this up in a class
+
+    class IO:
+        def __init__(x):
+            self.__unsafePerformIO = x
+        def sideEffects():
+            return self.__unsafePerformIO()
+
+    def putStrLn(x):
+
+       def tmp():
+         print(x)
+         return None
+
+       return IO(tmp)
+
+This is all well and could, though we're going to have to litter our code with
+calls to `__unsafePerformIO()`. And if we get it wrong we haven't really bought
+ourselves anything. Suppose we write:
+
+    def trickingPlus(x, y):
+        putStrLn("I'm impure").__unsafePerformIO()
+        return x + y
+
+    def main():
+        ...
+        return ifThenElse(b, trickingPlus(1, 2), trickingPlus(3, 4))
+
+Now `ifThenElse` is doing the wrong thing again. And while this is a pretty
+obviously wrong example, if our code is littered with calls to sideEffects()
+everywhere we're probably going to make a mistake at some point, and start
+getting the wrong answer.
+
+So we need ensure we never need to call sideEffects, but still be able to use
+sequential IO. And we do this by hiding the call behind some new class methods:
+
+    class IO:
+
+      def __init__(x):
+         self.__unsafePerformIO = x
+
+    @staticmethod
+    def pure(a)
+      return IO(lambda: a)
+
+    def bindIO(f):
+
+      def tmp():
+        x = self.__unsafePerformIO()
+        return f(x).__unsafePerformIO()
+
+     return IO(tmp)
+
+     def seqIO(f):
+       return self.bindIO(lambda _: f)
+
+`seqIO` isn't a primitive. We can just implemented in terms of `bind`, and it's
+used for the common case where we don't actually care about the return value,
+
+Now if we need to sequence IO we can do it like this:
+
+    main = putStrLn("Are you coming or going").seqIO(
+      readLine.bindIO(lambda x:
+      ifThenElse(x == "coming",
+        putStrLn("Hello"),
+        putStrLn("Goodbye"))))
+
+    main.__unsafePerformIO()
+
+`trickingPlus` has now become impossible to write without using
+`__unsafePerformIO`. We can do something like:
+
+   def trickingPlus(x, y):
+     return putStrLn("I have side-effects).seqIO(
+       IO.pure(x + y))
+
+But when we call it in the body of `ifThenElse` those side-effects won't
+be executed. `ifThenElse` simply will return one of the two IO objects, and
+that object will be sequenced into the overall program, and the whole chain
+will get evaluated by the single call to `__unsafePerformIO`. If we ever have a
+second call to `__unsafePerformIO` we know something is up, since we only ever
+need the one in our entire program.
+
+The main downside to this is our code has become a little noisier, but we have
+special syntax in Haskell to do this. Our running example looks like:
+
+    -- braces added to make how things are being nested more obvious, but if
+    -- you replace the braces and semicolons with whitespace this will still
+    -- work just fine
+
+    main :: IO ()
+    main = do {
+       putStrLn "Are you coming or going?";
+       x <- readLine;
+       ifThenElse (x == "comming")
+         (putStrLn "Hello")
+         (putStrLn "Goodbye")
+   }
+
+    trickyPlus :: Int -> Int -> IO Int
+    trickyPlus x y = do {
+        putStrLn "I have side-effects";
+        pure (x + y)
+    }
+
+`do` introduces the special syntax, the `<-` operator is `bindIO` with the
+lambda variable name on the left hand side, and lines without a lambda binding
+are calls to `seqIO`.
+
+The weird result of this is that `main` and `trickyPlus` are now completely
+pure. Effects will happen, but they aren't the ones responsible for doing them.
+In much the same way that if in Python we write:
+
+    greeter = putStrLn("Hello")
+
+`putStrLn` doesn't print to the screen. It returns a printer, but that printer
+is the thing responsible for printing, and we could just as well store it in
+a list, pass it to another function, or anything else, without actually calling
+__unsafePerformIO.
+
+If we write:
+
+    def printTwice(x):
+      printer = putStrLn(x)
+      return printer.seqIO(
+        printer)
+
+Or in Haskell:
+
+    printTwice :: String -> IO ()
+    printTwice x = do {
+        let greeter = putStrLn x;
+        greeter;
+        greeter;
+    }
+
+And call `printTwice("Hello")` nothing will be printed, because `printTwice`
+returns the printer, but it doesn't do the printing itself. Calling
+`__unsafePerformIO` is impure, but `printTwice` isn't in any way shape or form
+(except for heating up the computer).
+
+# Python without for loops, code blocks, `while True:`, etc.
+
+One neat result of this is the language becomes powerful enough to implement
+a lot of functionality that previously had to be implemented by the compiler
+writer. Let's also implement loops:
+
+    def while1(x):
+      """
+      x : IO[a]
+      returns IO[a]
+      """
+      return x.bindIO(lambda _: while1(x))
+
+    def forEach(xs, f):
+      """
+      xs : List[a]
+      f : a -> IO[None]
+      returns IO[None]
+      """
+      if null xs:
+        return IO.pure(None)
+      else:
+        x = head(x)
+        rest = tail(xs)
+        return f(x).seqIO(
+          forEach(rest, f))
+
+I'm using `bindIO(lambda _: x)` rather than `seqIO(x)`, because while we're
+pretending that the performance cost is being optimized away like it is in
+Haskell, in this instance our code will actually have an infinite loop, and I'd
+like to distinguish between "makes our computer hotter" and "doesn't ever
+return".
+
+We don't even need code blocks at all. We already say how we can get rid of
+`if` if we wanted. We can get rid of assignment and return by having the
+function:
+
+    def let(x, f):
+      return f(x)
+
+and then translating everything into lambdas:
+
+    x = y
+    return z
+
+    =>
+
+    let(y, lamda x: z)
+
+It turns out more types than IO support a bind operation. So do lists. We
+can also translate things like:
+
+    [ x + y for x in range(10) for y in range(x, 20) ]
+
+    =>
+
+    range(10).bindList(lambda x: range(x, 20).bindList(lambda y:
+    List.pure(x + y)))
+
+
+Or in Haskell
+
+    numbers :: [Int]
+    numbers = do
+        x <- [1 .. 10]
+        y <- [x .. 20]
+        pure (x + y)
+
+This is all well and good, and I have wanted multi-line lambdas once or twice,
+so it's neat that we can actually implement them today. But mostly this falls
+into "neat I guess?" territory. Python already supports special syntax for
+loops, list comprehensions, variable assignment, return statements. What can we
+do in Haskell that we can't do nicely in Python?
+
+# The Point, Finally
+
+## Regular expressions, Context-free parsers, and context-sensitive parsers
+
+It turns out parsers can also use this interface. Suppose we want to do 
+
+Regular expressions can work in this interface provided we don't do something
+recursive like:
+
+    data SExp a = SExp [SExp a] | Atom a
+
+    contextFree :: Parser a -> Parser (SExp a)
+    contextFree atom = fmap Atom atom <|> (do
+        char '('
+        x <- some contextFree
+        char ')'
+        pure (SExp x)
+
+Unfortunately Haskell can't prevent us from accidentally writing this, since an
+infinite regular expression is a perfectly acceptable Haskell data type.
+actual issue is that the process of compiling the regular expression requires
+fully evaluating it, resulting in an infinite loop.
+
+Parsers for regular expressions and context-free languages are *zippy*. They
+all admit functions like:
+
+    fmap :: (a -> b) -> Parser a -> Parser b
+    liftA2 :: (a -> b -> c) -> Parser a -> Parser b -> Parser c
+    liftA3 :: (a -> b -> c -> d) -> Parser a -> Parser b -> Parser c -> Parser d
+    ...
+
+We can also write context-sensitive parsers (luckily Haskell will stop us from
+doing this if the parsing type we're using isn't context-sensitive)
+
+    contextSensitive :: Parser Int
+    contextSensitive = do
+        a <- some (char 'a')
+        let n = length a
+        replicateM n (char 'b')
+        replicateM n (char 'c')
+        pure n
+     where
+       replicateM :: Int -> Parser a -> Parser [a]
+
+The thing that makes this context-sensitive is the dependency of the parser
+returned by `replicateM` on the value returned by the earlier parser.
+
+The `stm` library lets us write sequential IO code that backtracks. Databases
+use this when someone needs to interact with a database and make multiple
+changes atomically, where if a computer crashes part way through the
+transaction the database could be left in a corrupted state, and needs to be
+rolled back. This is used for lock-free concurrent mutable state.
+
+    atomicThing :: IO Int
+    atomicThing = atomically (do
+        x <- getUID
+        makeChange x
+        makeChange y
+        pure x)
+      where
+        getUID :: STM Int
+        makeChange :: Int -> STM ()
+
+The (<|>) that is used to express alternation in parsers is also used by `stm`,
+to express the logic "attempt to atomically do the thing on the left hand side,
+and if something goes wrong attempt to atomically do the thing on the right
+hand side.
+
+Whether we model probabalistic computations as a function that mutates a
+internal random number generator, a tree of possible answers, or a quantum
+superposition, we can use the same interface:
+
+FIXME
+
+ST lets us have real mutation within pure code, without having to resort to
+`unsafePerformIO`
+
+We can also compose quite a few (though not all) Monads together, to get types
+that mix and match different effects
+
+For some other things that are zippy, but not fully sequential:
+
+The `foldl` library lets use write self-fusing loops over iterable containers.
+
+    -- takes an input container of doubles, and reduces it to a single double
+    average :: Fold Double Double
+    average = do
+        s <- Fold.sum
+        l <- Fold.length
+        pure (s / l)
+
+The `async` library provides the `Concurrently` type (which wraps `IO`), and
+lets us execute IO code in parallel.
+
+    areTheyEqual :: IO ()
+    areTheyEqual = runConcurrently (do
+        x <- fetchDataFromSite1
+        y <- fetchDataFromSite2
+        pure (x == y))
+
+The (<|>) operator that we use for parsers also works for Concurrently, to
+express the logic "execute both arguments, and return the quicker of the two.
+
+
+All zippy types are composable, so we could have self-fusing loops that also
+perform IO in parallel.
+
+# My experience as a Haskell programmer
+
+After finally grokking IO I did have the feeling "okay, but how do I splice
+my code together in such a way that the effects I want deep in some function
+call are still executed." I think a lot of Haskell programmers feel like that
+for a while. But what you do is exactly the same as what you do in Python:
+ensure that the code you want executed is . The only difference is before when
+you used `=` now sometimes you use `<-`, and you can't lie and say "I don't
+have any side-effects". Every time you 
+
+# There is sometimes a cost to this. `print(input())` becomes
+`print =<< input`, or even `do { x <- input ; print x }`. We don't have a great
+syntax for lots of nested binds where the result of one bind is only used a
+single time (Idris supportsa variable is used only once (syntax like that does exist, but GHC doesn't
+
+The big change with Haskell is that suddenly IO is first-class. We don't have
+something like `getFileContents(someFile)` which is a string, but also some IO
+happens. `getFileContents someFile` is fundamentally distinct from the file's
+contents, and while we could use `<-` to get at the contents we might do
+something else with it. And making IO first class also makes a bunch of other
+things first class too.
+

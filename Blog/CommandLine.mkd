@@ -1,0 +1,45 @@
+
+# CLI tools
+
+## Admin stuff
+`mkdir -p path/to/directory`: creates a directory, including its parents if necessary
+`ag`: regex-based search of file contents, recursively from the current directory
+`du -hs *`: list diskusage for each folder in the current directory
+`df -h`: list disk usage for each disk
+`find *`: recursively list every file from the current directory
+`top`: shows a real-time summary of running processes.
+`chmod`/`chown`: change permissions or ownership of a file or directory
+`ls -lsh`: show files/folders in current directory
+`lsof`: show files that are currently open
+
+
+
+### man/tldr
+
+`man` shows the manual for a given program, e.g. `man top` to see the man page for `top`. You can control which pager is used with any of the three following ways, in descending order of priority.
+
+
+```
+man --pager {pager}
+$MANPAGER
+$PAGER
+```
+
+`tldr` shows a simplified manpage.
+
+
+## User stuff
+less: simple interface to read a file
+
+nvim
+
+ranger: file browser
+
+irssi: irc client
+
+# Websites
+
+## [Hipku](https://gabrielmartin.net/projects/hipku/)
+
+Encodes any IP address as a haiku. I'm curious about tools like this for general hashing. ASCII art is the obvious example of this, but I think sentences might work better; one comment I read on a stackoverflow comment suggested there sentences worked better psychologically.
+
