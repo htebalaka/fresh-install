@@ -84,8 +84,8 @@ function fish_prompt
         section git $git_branch
     end
 
-    set_color black
     printf "\n> "
+    set_color black
 end
 
 function fish_right_prompt
