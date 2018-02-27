@@ -34,6 +34,10 @@ source ~/gits/fresh-install/vim/plugins/airline.vim
 source ~/gits/fresh-install/vim/plugins/hardtime.vim
 source ~/gits/fresh-install/vim/plugins/unite.vim
 
+" made comments wrap
+set formatoptions-=t
+
+
 " source language specific settings
 autocmd FileType haskell source ~/gits/fresh-install/vim/lang/haskell.vim
 autocmd FileType python source ~/gits/fresh-install/vim/lang/python.vim
